@@ -27,13 +27,20 @@ Route::prefix('backend')->middleware(['auth'])->group(function () {
     Route::view('/', 'architect.index')->name('index');
 
     Route::namespace('Backend')->group(function () {
-        Route::resource('users', 'UserController');
-        Route::resource('outlet', 'OutletController');
-        Route::resource('department', 'DepartmentController');
-        Route::resource('issue', 'IssueController');
-        Route::resource('ticketStatus', 'TicketStatusController');
-        Route::resource('smsRecipient', 'SmsRecipientController');
-        Route::resource('complain', 'ComplainController');
+
+        Route::middleware(['can:admin-access'])->group(function () {
+            Route::resource('users', 'UserController');
+            Route::resource('outlet', 'OutletController');
+            Route::resource('department', 'DepartmentController');
+            Route::resource('issue', 'IssueController');
+            Route::resource('ticketStatus', 'TicketStatusController');
+            Route::resource('smsRecipient', 'SmsRecipientController');
+            Route::resource('complain', 'ComplainController')->except(['destroy']);
+        });
+
+        Route::middleware(['can:agent-access'])->group(function () {
+            Route::resource('complain', 'ComplainController')->only(['create', 'index', 'store']);
+        });
     });
 
 });

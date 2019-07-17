@@ -3,7 +3,11 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\UserLogin;
+use Carbon\Carbon;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class LoginController extends Controller
 {
@@ -68,5 +72,15 @@ class LoginController extends Controller
     public function redirectTo()
     {
         return route('index');
+    }
+
+    protected function authenticated(Request $request, $user)
+    {
+        $login = new UserLogin;
+        $login->ip_address = $request->getClientIp();
+        $login->user_agent = $request->userAgent();
+        $login->session_id = session()->getId();
+        $login->login_time = Carbon::now();
+        $user->user_logins()->save($login);
     }
 }

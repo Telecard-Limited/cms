@@ -8,6 +8,7 @@ use App\Outlet;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\Facades\DataTables;
 use Yajra\DataTables\Html\Builder;
 
@@ -37,13 +38,14 @@ class ComplainController extends Controller
                     return $complain->complainable->name;
                 })
                 ->editColumn('ticket_status_id', function (Complain $complain) {
-                    return $complain->ticket_status->name;
+                    $status = $complain->ticket_status->name;
+                    $badge = $status == "Closed" ? "success" : "danger";
+                    return "<span class='badge badge-$badge'>$status</span>";
                 })
                 ->editColumn('issue_id', function (Complain $complain) {
-                    $issue = $complain->issue->name;
-                    return "<span class='badge badge-dark'>$issue</span>";
+                    return $complain->issue->name;
                 })
-                ->rawColumns(['edit', 'issue_id'])
+                ->rawColumns(['edit', 'ticket_status_id'])
                 ->toJson();
         }
 
@@ -107,6 +109,7 @@ class ComplainController extends Controller
         $complain->order_number = $request->order_number;
         $complain->desc = $request->desc;
         $complain->remarks = $request->remarks;
+        $complain->user_id = Auth::user()->id;
 
         $type = $request->type;
 

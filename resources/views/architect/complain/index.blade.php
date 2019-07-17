@@ -13,12 +13,12 @@
     <div class="main-card mb-3 card">
         <div class="card-header">
             <div class="btn-actions-pane-right">
-                <a class="btn-icon btn btn-secondary">
+                <button class="btn-icon btn btn-secondary">
                     <i class="pe-7s-cloud-download btn-icon-wrapper"></i> Export
-                </a>
-                <a class="btn-icon btn btn-primary">
+                </button>
+                <button class="btn-icon btn btn-primary">
                     <i class="pe-7s-cloud-upload btn-icon-wrapper"></i> Import
-                </a>
+                </button>
             </div>
         </div>
         <div class="card-body table-responsive">
