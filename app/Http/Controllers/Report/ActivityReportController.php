@@ -80,7 +80,7 @@ class ActivityReportController extends Controller
                     return $activity->causer_type == null ? "NULL" : explode("\\", $activity->causer_type)[1];
                 })
                 ->editColumn('causer_id' , function (Activity $activity) {
-                    return $activity->causer->name;
+                    return $activity->causer == null ? "NULL" : $activity->causer->name;
                 })
                 ->rawColumns(['description'])
                 ->toJson();
