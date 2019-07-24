@@ -18,6 +18,7 @@ class CreateDepartmentsTable extends Migration
             $table->string('name');
             $table->boolean('active')->default(true);
             $table->text('desc')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

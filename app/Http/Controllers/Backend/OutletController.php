@@ -24,18 +24,16 @@ class OutletController extends Controller
         if(request()->ajax()) {
             return DataTables::of($query)
                 ->addColumn('edit', function (Outlet $outlet) {
-                    $route = route('outlet.edit', $outlet->id);
-                    return "<a href='$route' class='mb-2 mr-2 btn-icon btn btn-primary'><i class='pe-7s-tools btn-icon-wrapper'></i> Edit</a>";
+                    return view('architect.datatables.form-edit', ['model' => $outlet, 'route' => 'outlet']);
                 })
-                ->editColumn('active', function (Outlet $outlet) {
-                    $outletText = $outlet->active == true ? "Active" : "Inactive";
-                    $badge = $outlet->active  == true ? "success" : "danger";
-                    return "<a href='javascript:void(0)' class='mb-2 mr-2 badge badge-$badge ? success : danger'>$outletText</a>";
+                ->addColumn('delete', function (Outlet $outlet) {
+                    return view('architect.datatables.form-delete', ['model' => $outlet, 'route' => 'outlet']);
                 })
+                ->editColumn('active', 'architect.datatables.form-active')
                 ->editColumn('created_at', function (Outlet $outlet) {
                     return Carbon::parse($outlet->created_at)->diffForHumans();
                 })
-                ->rawColumns(['edit', 'active'])
+                ->rawColumns(['edit', 'active', 'delete'])
                 ->toJson();
         }
 
@@ -43,8 +41,11 @@ class OutletController extends Controller
             ['data' => 'id', 'title' => 'ID'],
             ['data' => 'name', 'title' => 'Name'],
             ['data' => 'active', 'title' => 'Status'],
-            ['data' => 'created_at', 'title' => 'Created At'],
-            ['data' => 'edit', 'title' => '']
+            ['data' => 'city', 'title' => 'City'],
+            ['data' => 'created_at', 'title' => 'Created'],
+            ['data' => 'updated_at', 'title' => 'Updated'],
+            ['data' => 'edit', 'title' => ''],
+            ['data' => 'delete', 'title' => '']
         ]);
         return view('architect.outlet.index', compact('html'));
     }
@@ -69,13 +70,16 @@ class OutletController extends Controller
     {
         $request->validate([
             'name' => 'required', 'string', 'unique:outlets,name',
-            'active' => 'in:on'
+            'active' => 'in:on',
+            'city' => ['required', 'string'],
+            'desc' => ['nullable']
         ]);
 
         $outlet = Outlet::create([
             'name' => $request->name,
             'active' => $request->has('active') && $request->active == "on" ? true : false,
-            'desc' => $request->desc ?: null
+            'desc' => $request->desc ?: null,
+            'city' => $request->city
         ]);
         return redirect()->route('outlet.index')->with('status', 'Outlet has been created.');
     }
@@ -113,12 +117,16 @@ class OutletController extends Controller
     {
         $request->validate([
             'name' => 'required', 'string', Rule::unique('outlets', 'name')->ignore($outlet->id, 'name'),
-            'active' => 'in:on'
+            'active' => 'in:on',
+            'city' => ['required', 'string'],
+            'desc' => ['nullable']
         ]);
 
         $outlet->update([
             'name' => $request->name,
-            'active' => $request->has('active') && $request->active == "on" ? 1 : 0
+            'active' => $request->has('active') && $request->active == "on" ? true : false,
+            'city' => $request->city,
+            'desc' => $request->desc ?: null
         ]);
         return redirect()->route('outlet.index')->with('status', 'Outlet has been updated.');
     }

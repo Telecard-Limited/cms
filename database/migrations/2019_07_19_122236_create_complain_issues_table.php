@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddCreatedByInComplainsTable extends Migration
+class CreateComplainIssuesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,11 @@ class AddCreatedByInComplainsTable extends Migration
      */
     public function up()
     {
-        Schema::table('complains', function (Blueprint $table) {
-            $table->unsignedBigInteger('user_id');
+        Schema::create('complain_issue', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('complain_id');
+            $table->unsignedBigInteger('issue_id');
+            $table->softDeletes();
         });
     }
 
@@ -25,8 +28,6 @@ class AddCreatedByInComplainsTable extends Migration
      */
     public function down()
     {
-        Schema::table('complains', function (Blueprint $table) {
-            $table->dropColumn('user_id');
-        });
+        Schema::dropIfExists('complain_issue');
     }
 }

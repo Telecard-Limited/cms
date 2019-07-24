@@ -20,6 +20,12 @@ class UserAccountsSeeder extends Seeder
                 'email' => 'abdullah.basit@hotmail.com',
                 'username' => 'nimda',
                 'password' => bcrypt('abdullah')
+            ],
+            [
+                'name' => 'Admin',
+                'email' => 'admin@example.com',
+                'username' => 'admin',
+                'password' => bcrypt('admin123')
             ]
         ];
 
@@ -29,12 +35,15 @@ class UserAccountsSeeder extends Seeder
             ['name' => 'superadmin', 'desc' => 'Super Admin'],
             ['name' => 'admin', 'desc' => 'Administrator'],
             ['name' => 'agent', 'desc' => 'Agent'],
-            ['name' => 'supervisor', 'desc' => 'Supervisor']
+            ['name' => 'supervisor', 'desc' => 'Supervisor'],
+            ['name' => 'rating', 'desc' => 'Rating User']
         ];
 
         DB::table('roles')->insert($rolesData);
 
         $role = Role::where("name", "superadmin")->first();
+        $roleAdmin = Role::where("name", "admin")->first();
         $user = User::where("name", 'Super Admin')->first()->roles()->attach($role->id);
+        $userAdmin = User::where("name", 'Admin')->first()->roles()->attach($roleAdmin->id);
     }
 }

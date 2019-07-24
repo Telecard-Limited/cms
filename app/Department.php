@@ -3,18 +3,18 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 class Department extends Model
 {
+    use LogsActivity;
+    use SoftDeletes;
+    protected static $logAttributes = ['*'];
     protected $fillable = ['name', 'active', 'desc'];
-
-    public function sms_recipients()
-    {
-        return $this->morphMany('App\SmsRecipient', 'sms_recipientable');
-    }
 
     public function complains()
     {
-        return $this->morphMany('App\Complain', 'complainable');
+        return $this->hasMany('App\Complain');
     }
 }

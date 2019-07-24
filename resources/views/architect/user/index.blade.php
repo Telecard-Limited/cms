@@ -11,8 +11,8 @@
 @section('content')
 
     <div class="main-card mb-3 card">
-        <div class="card-body">
-            {!! $html->table() !!}
+        <div class="card-body table-responsive">
+            {!! $html->table(['class' => 'table table-hover', 'style' => 'width: 100%;']) !!}
         </div>
     </div>
 

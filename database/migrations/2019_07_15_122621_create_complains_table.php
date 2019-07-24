@@ -15,17 +15,16 @@ class CreateComplainsTable extends Migration
     {
         Schema::create('complains', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('customer_name');
-            $table->string('customer_number');
-            $table->string('order_number')->nullable();
+            $table->string('order_id')->nullable();
             $table->text('desc')->nullable();
-            $table->text('remarks')->nullable();
+            $table->string('remarks')->nullable();
+            $table->string('title')->nullable();
 
-            $table->unsignedBigInteger('complainable_id');
-            $table->string('complainable_type');
-
+            $table->unsignedBigInteger('outlet_id');
             $table->unsignedBigInteger('ticket_status_id');
-            $table->unsignedBigInteger('issue_id');
+            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('customer_id');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

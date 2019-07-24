@@ -37,25 +37,31 @@
                 </div>
 
                 <div class="form-group row">
-                    <div class="col-sm-2">
-
+                    <label for="active" class="col-form-label col-sm-2">Active</label>
+                    <div class="col-sm-10">
+                        <input id="active" name="active" class="form-control @error('active') is-invalid @enderror" type="checkbox" data-toggle="toggle" data-onstyle="success" data-offstyle="danger" {{ old('active') || $outlet->active ? 'checked' : '' }}>
+                        @error('active')
+                        <div class="invalid-feedback">
+                            <strong>{{ $message }}</strong>
+                        </div>
+                        @enderror
                     </div>
-                    <div class="custom-checkbox custom-control col-sm-10">
-
-                        <input {{ $outlet->active ? 'checked' : '' }} name="active" type="checkbox" id="active" class="custom-control-input">
-                        <label class="custom-control-label" for="active">
-                            Active?
-                        </label>
-                    </div>
-
-
                 </div>
 
-                @error('active')
-                <div class="invalid-feedback">
-                    <strong>{{ $message }}</strong>
+                <div class="form-group row">
+                    <label for="city" class="col-form-label col-sm-2">City</label>
+                    <div class="col-sm-10">
+                        <select name="city" type="text" id="city" class="form-control city-select @error('city') is-invalid @enderror" required>
+                            <option></option>
+                        </select>
+                        @error('city')
+                        <div class="invalid-feedback">
+                            <strong>{{ $message }}</strong>
+                        </div>
+                        @enderror
+                    </div>
+
                 </div>
-                @enderror
 
                 <div class="form-group row">
                     <label for="desc" class="col-form-label col-sm-2">Description</label>
@@ -81,3 +87,21 @@
     </div>
 
 @endsection
+
+@push('scripts')
+    <script src="{{ asset('assets/scripts/cities.js') }}"></script>
+    <script>
+        var selected = '{{ old('city') ?: $outlet->city }}';
+
+        $(document).ready(function () {
+            $('.city-select').select2({
+                placeholder: 'Select City',
+                theme: 'bootstrap4',
+                data: data,
+                selected: selected
+            });
+            $('.city-select').val(selected).trigger("change");
+        });
+
+    </script>
+@endpush

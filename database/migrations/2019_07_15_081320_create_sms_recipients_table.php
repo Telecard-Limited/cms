@@ -18,8 +18,9 @@ class CreateSmsRecipientsTable extends Migration
             $table->string('name');
             $table->string('number');
             $table->text('desc')->nullable();
-            $table->unsignedBigInteger('sms_recipientable_id');
-            $table->string('sms_recipientable_type');
+
+            $table->unsignedBigInteger('department_id');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

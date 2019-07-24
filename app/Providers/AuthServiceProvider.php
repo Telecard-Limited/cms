@@ -37,5 +37,9 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('supervisor-access', function (User $user) {
             return $user->roles()->get()->contains('name', 'supervisor');
         });
+
+        Gate::define('rating-access', function (User $user) {
+            return $user->roles()->get()->contains('name', 'rating');
+        });
     }
 }

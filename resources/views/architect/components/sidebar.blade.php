@@ -1,4 +1,4 @@
-<div class="app-sidebar sidebar-shadow">
+<div class="app-sidebar sidebar-shadow bg-night-sky sidebar-text-light">
     <div class="app-header__logo">
         <div class="logo-src"></div>
         <div class="header__pane ml-auto">
@@ -61,6 +61,27 @@
                             </li>
                         </ul>
                     </li>
+                    <li class="{{ request()->is('*customer*') ? 'mm-active' : '' }}">
+                        <a href="javascript:void(0);" class="{{ request()->is('*customer*') ? 'mm-active' : '' }}">
+                            <i class="metismenu-icon pe-7s-add-user"></i>
+                            Customer
+                            <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
+                        </a>
+                        <ul>
+                            <li>
+                                <a href="{{ route('customer.create') }}" class="{{ request()->is('*customer/create') ? 'mm-active' : '' }}">
+                                    <i class="metismenu-icon"></i>
+                                    Add
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('customer.index') }}" class="{{ request()->is('*customer') ? 'mm-active' : '' }}">
+                                    <i class="metismenu-icon">
+                                    </i>List
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
                     {{--<li>
                         <a href="javascript:void(0);" class="{{ request()->is('*roles/*') ? 'mm-active' : '' }}">
                             <i class="metismenu-icon pe-7s-users"></i>
@@ -88,7 +109,7 @@
                             </li>
                         </ul>
                     </li>
-                    <li class="{{ request()->is('*department*') ? 'mm-active' : '' }}">
+                    {{--<li class="{{ request()->is('*department*') ? 'mm-active' : '' }}">
                         <a href="javascript:void(0);" class="{{ request()->is('*department*') ? 'mm-active' : '' }}">
                             <i class="metismenu-icon pe-7s-home"></i>
                             Departments
@@ -108,11 +129,11 @@
                                 </a>
                             </li>
                         </ul>
-                    </li>
+                    </li>--}}
                     <li class="{{ request()->is('*issue*') ? 'mm-active' : '' }}">
                         <a href="javascript:void(0);" class="{{ request()->is('*issue/*') ? 'mm-active' : '' }}">
                             <i class="metismenu-icon pe-7s-help1"></i>
-                            Nature of Issues
+                            Complaint Type
                             <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
                         </a>
                         <ul>
@@ -133,7 +154,7 @@
                     <li class="{{ request()->is('*ticketStatus*') ? 'mm-active' : '' }}">
                         <a href="javascript:void(0);" class="{{ request()->is('*ticketStatus/*') ? 'mm-active' : '' }}">
                             <i class="metismenu-icon pe-7s-ticket"></i>
-                            Ticket Statuses
+                            Status
                             <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
                         </a>
                         <ul>
@@ -151,7 +172,7 @@
                             </li>
                         </ul>
                     </li>
-                    <li class="{{ request()->is('*smsRecipient*') ? 'mm-active' : '' }}">
+                    {{--<li class="{{ request()->is('*smsRecipient*') ? 'mm-active' : '' }}">
                         <a href="javascript:void(0);" class="{{ request()->is('*smsRecipient/*') ? 'mm-active' : '' }}">
                             <i class="metismenu-icon pe-7s-mail"></i>
                             SMS Recipients
@@ -171,12 +192,12 @@
                                 </a>
                             </li>
                         </ul>
-                    </li>
+                    </li>--}}
                 @endcan
                 @if(Auth::user()->can('admin-access') || Auth::user()->can('agent-access'))
                     <li class="app-sidebar__heading">CRM</li>
-                    <li class="{{ request()->is('*complain*') ? 'mm-active' : '' }}">
-                        <a href="javascript:void(0);" class="{{ request()->is('*complain*') ? 'mm-active' : '' }}">
+                    <li class="{{ request()->is('*complain*') && !request()->is('*reports*') ? 'mm-active' : '' }}">
+                        <a href="javascript:void(0);" class="{{ request()->is('*complain*') && !request()->is('*reports*') ? 'mm-active' : '' }}">
                             <i class="metismenu-icon pe-7s-comment"></i>
                             Complaints
                             <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
@@ -197,7 +218,47 @@
                         </ul>
                     </li>
                 @endif
-                <li class="app-sidebar__heading">Rating Portal</li>
+                @if(Auth::user()->can('admin-access') || Auth::user()->can('rating-access'))
+                    <li class="app-sidebar__heading">Rating SMS</li>
+                    <li class="{{ request()->is('*rating*') && !request()->is('*reports*') ? 'mm-active' : '' }}">
+                        <a href="javascript:void(0);" class="{{ request()->is('*rating*') && !request()->is('*reports*') ? 'mm-active' : '' }}">
+                            <i class="metismenu-icon pe-7s-news-paper"></i>
+                            Rating SMS Complains
+                            <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
+                        </a>
+                        <ul>
+                            <li>
+                                <a href="{{ route('rating.create') }}" class="{{ request()->is('*rating/create') ? 'mm-active' : '' }}">
+                                    <i class="metismenu-icon"></i>
+                                    Add
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('rating.index') }}" class="{{ request()->is('*rating') ? 'mm-active' : '' }}">
+                                    <i class="metismenu-icon">
+                                    </i>List
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                @endif
+                @can('admin-access')
+                    <li class="app-sidebar__heading">Reports</li>
+                    <li>
+                        <a href="{{ route('report.complain.get') }}" class="{{ request()->is('*reports/complains') ? 'mm-active' : '' }}">
+                            <i class="metismenu-icon lnr-database"></i>
+                            Customer Complains
+                        </a>
+                        <a href="{{ route('report.rating.get') }}" class="{{ request()->is('*reports/ratings') ? 'mm-active' : '' }}">
+                            <i class="metismenu-icon pe-7s-news-paper"></i>
+                            Rating Complains
+                        </a>
+                        <a href="{{ route('report.activity') }}" class="{{ request()->is('*reports/activity') ? 'mm-active' : '' }}">
+                            <i class="metismenu-icon pe-7s-note2"></i>
+                            Activity Logs
+                        </a>
+                    </li>
+                @endcan
             </ul>
         </div>
     </div>

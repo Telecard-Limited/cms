@@ -3,21 +3,22 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 class Outlet extends Model
 {
-    protected $fillable = ['name', 'active'];
+    use LogsActivity;
+
+    use SoftDeletes;
+    protected static $logAttributes = ['*'];
+    protected $fillable = ['name', 'active', 'city', 'desc'];
     protected $casts = [
         'active' => 'boolean'
     ];
 
-    public function sms_recipients()
-    {
-        return $this->morphMany('App\SmsRecipient', 'sms_recipientable');
-    }
-
     public function complains()
     {
-        return $this->morphMany('App\Complain', 'complainable');
+        return $this->hasMany('App\Complain');
     }
 }

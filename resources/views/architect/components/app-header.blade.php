@@ -1,4 +1,4 @@
-<div class="app-header header-shadow bg-secondary header-text-light">
+<div class="app-header header-shadow bg-night-sky header-text-light">
     <div class="app-header__logo">
         <div class="logo-src"></div>
         <div class="header__pane ml-auto">
@@ -76,7 +76,9 @@
                                 {{ Auth::user()->name }}
                             </div>
                             <div class="widget-subheading">
-                                {{ Auth::user()->roles()->first()->desc }}
+                                @foreach(Auth::user()->roles as $key => $role)
+                                    {{ $role->desc }}
+                                @endforeach
                             </div>
                         </div>
                         {{--<div class="widget-content-right header-user-info ml-3">

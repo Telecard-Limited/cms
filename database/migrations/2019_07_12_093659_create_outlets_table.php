@@ -18,6 +18,8 @@ class CreateOutletsTable extends Migration
             $table->string('name');
             $table->boolean('active')->default(true);
             $table->text('desc')->nullable();
+            $table->string('city');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

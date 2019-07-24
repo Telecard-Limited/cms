@@ -35,11 +35,35 @@ Route::prefix('backend')->middleware(['auth'])->group(function () {
             Route::resource('issue', 'IssueController');
             Route::resource('ticketStatus', 'TicketStatusController');
             Route::resource('smsRecipient', 'SmsRecipientController');
-            Route::resource('complain', 'ComplainController')->except(['destroy']);
+            Route::resource('rating', 'RatingController');
+
+            // Export Routes
+
         });
 
-        Route::middleware(['can:agent-access'])->group(function () {
-            Route::resource('complain', 'ComplainController')->only(['create', 'index', 'store']);
+        // Search Route
+        Route::get('/searchCustomer', 'SearchController@searchCustomer')->name('search.customer');
+
+        Route::resource('customer', 'CustomerController');
+        Route::resource('complain', 'ComplainController')->except(['destroy']);
+        Route::get('/export/complain', 'ComplainController@export')->name('complain.export');
+
+        //Widgets
+        Route::get('/getWidgetData', 'WidgetController@getData')->name('widget.data');
+        Route::get('/getChartLabels', 'WidgetController@getChartLabels')->name('chart.labels');
+    });
+
+    Route::namespace('Report')->middleware(['can:admin-access'])->prefix('reports')->group(function () {
+        Route::prefix('complains')->group(function () {
+            Route::view('/', 'architect.reports.complains')->name('report.complain.get');
+            Route::post('report', 'ComplainReportController@report')->name('report.complain.post');
+        });
+        Route::prefix('ratings')->group(function () {
+            Route::view('/', 'architect.reports.ratings')->name('report.rating.get');
+            Route::post('report', 'RatingReportController@report')->name('report.rating.post');
+        });
+        Route::prefix('activity')->group(function () {
+            Route::get('/', 'ActivityReportController@index')->name('report.activity');
         });
     });
 

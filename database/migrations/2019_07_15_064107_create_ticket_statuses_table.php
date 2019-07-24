@@ -18,6 +18,7 @@ class CreateTicketStatusesTable extends Migration
             $table->string('name');
             $table->text('desc')->nullable();
             $table->boolean('active')->default(true);
+            $table->softDeletes();
             $table->timestamps();
         });
     }

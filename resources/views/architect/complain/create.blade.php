@@ -7,7 +7,7 @@
 @section('icon', 'pe-7s-comment')
 
 @push('styles')
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/css/select2.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tarekraafat/autocomplete.js@6.1.0/dist/css/autoComplete.min.css">
 @endpush
 
 @section('content')
@@ -18,10 +18,51 @@
                 @csrf
 
                 <div class="form-group row">
-                    <label for="name" class="col-form-label col-sm-2">Customer Name<sup style="color:red;">*</sup></label>
+                    <label for="name" class="col-form-label col-sm-2">Search Customer</label>
                     <div class="col-sm-10">
-                        <input name="customer_name" type="text" id="customer_name" placeholder="Customer Name" value="{{ old('customer_name') }}" class="form-control @error('customer_name') is-invalid @enderror">
-                        @error('customer_name')
+                        <select class="form-control" type="text" id="search_customer">
+                            <option></option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-6 offset-sm-6">
+                        <h4 class="font-weight-bold"><i>OR</i></h4>
+                    </div>
+                </div>
+
+                <input type="hidden" name="customer_id" id="customer_id">
+
+                <div class="form-group">
+                    <div class="row">
+                        <label for="name" class="col-form-label col-sm-2">Customer Name <sup style="color:red;">*</sup></label>
+                        <div class="col-sm-4">
+                            <input name="customer_name" type="text" id="customer_name" placeholder="Customer Name" value="{{ old('customer_name') }}" class="form-control @error('customer_name') is-invalid @enderror">
+                            @error('customer_name')
+                            <div class="invalid-feedback">
+                                <strong>{{ $message }}</strong>
+                            </div>
+                            @enderror
+                        </div>
+
+                        <label for="name" class="col-form-label col-sm-2">Customer Number <sup style="color:red;">*</sup></label>
+                        <div class="col-sm-4">
+                            <input name="customer_number" type="text" id="customer_number" placeholder="Customer Number" value="{{ old('customer_number') }}" class="form-control @error('customer_number') is-invalid @enderror">
+                            @error('customer_number')
+                            <div class="invalid-feedback">
+                                <strong>{{ $message }}</strong>
+                            </div>
+                            @enderror
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="title" class="col-form-label col-sm-2">Complain Title</label>
+                    <div class="col-sm-10">
+                        <input name="title" type="text" id="title" placeholder="Title" value="{{ old('title') }}" class="form-control @error('title') is-invalid @enderror">
+                        @error('title')
                         <div class="invalid-feedback">
                             <strong>{{ $message }}</strong>
                         </div>
@@ -31,10 +72,10 @@
                 </div>
 
                 <div class="form-group row">
-                    <label for="name" class="col-form-label col-sm-2">Customer Number <sup style="color:red;">*</sup></label>
+                    <label for="order_id" class="col-form-label col-sm-2">Order Number</label>
                     <div class="col-sm-10">
-                        <input name="customer_number" type="text" id="customer_number" placeholder="Customer Number" value="{{ old('customer_number') }}" class="form-control @error('customer_number') is-invalid @enderror">
-                        @error('customer_number')
+                        <input name="order_id" type="text" id="order_id" placeholder="Order Number" value="{{ old('order_id') }}" class="form-control @error('order_id') is-invalid @enderror">
+                        @error('order_id')
                         <div class="invalid-feedback">
                             <strong>{{ $message }}</strong>
                         </div>
@@ -44,33 +85,15 @@
                 </div>
 
                 <div class="form-group row">
-                    <label for="order_number" class="col-form-label col-sm-2">Order Number</label>
+                    <label for="outlet_id" class="col-form-label col-sm-2">Outlet <sup style="color:red;">*</sup></label>
                     <div class="col-sm-10">
-                        <input name="order_number" type="text" id="order_number" placeholder="Order Number" value="{{ old('order_number') }}" class="form-control @error('order_number') is-invalid @enderror">
-                        @error('order_number')
-                        <div class="invalid-feedback">
-                            <strong>{{ $message }}</strong>
-                        </div>
-                        @enderror
-                    </div>
-
-                </div>
-
-                <div class="form-group row">
-                    <label for="type_id" class="col-form-label col-sm-2">Outlet / Department <sup style="color:red;">*</sup></label>
-                    <input name="type" id="type" type="hidden" value="" required>
-                    <div class="col-sm-10">
-                        <select class="select form-control @error('type_id') is-invalid @enderror" style="width: 100%; height: 100%" name="type_id" id="type_id" required>
-                            <option value="" disabled="" selected>{{ __('Select Option') }}</option>
-                            @foreach($groups as $index => $group)
-                                <optgroup label="{{ $index }}">
-                                    @foreach($group as $i => $item)
-                                        <option value="{{ $i }}">{{ $item }}</option>
-                                    @endforeach
-                                </optgroup>
+                        <select class="form-control singleselect-dropdown @error('outlet_id') is-invalid @enderror" style="width: 100%; height: 100%" name="outlet_id" id="outlet_id" required>
+                            <option></option>
+                            @foreach(\App\Outlet::pluck('name', 'id') as $index => $outlet)
+                                <option {{ old('outlet_id') == $index ? 'selected' : ''  }} value="{{ $index }}">{{ $outlet }}</option>
                             @endforeach
                         </select>
-                        @error('type_id')
+                        @error('outlet_id')
                         <div class="invalid-feedback">
                             <strong>{{ $message }}</strong>
                         </div>
@@ -81,10 +104,10 @@
                 <div class="form-group row">
                     <label for="issue_id" class="col-form-label col-sm-2">Complaint Type <sup style="color:red;">*</sup></label>
                     <div class="col-sm-10">
-                        <select class="select form-control @error('issue_id') is-invalid @enderror" style="width: 100%;" name="issue_id" id="issue_id" required>
-                            <option value="" disabled="" selected>{{ __('Select Option') }}</option>
+                        <select class="form-control multiselect-dropdown @error('issue_id') is-invalid @enderror" style="width: 100%;" name="issue_id[]" multiple id="issue_id" required>
+                            <option></option>
                             @foreach(\App\Issue::pluck('name', 'id') as $index => $issue)
-                                <option value="{{ $index }}">{{ $issue }}</option>
+                                <option {{ old('issue_id') == $index ? 'selected' : ''  }} value="{{ $index }}">{{ $issue }}</option>
                             @endforeach
                         </select>
                         @error('issue_id')
@@ -98,10 +121,10 @@
                 <div class="form-group row">
                     <label for="ticket_status_id" class="col-form-label col-sm-2">Status <sup style="color:red;">*</sup></label>
                     <div class="col-sm-10">
-                        <select class="select form-control @error('ticket_status_id') is-invalid @enderror" style="width: 100%;" name="ticket_status_id" id="ticket_status_id" required>
-                            <option value="" disabled="" selected>{{ __('Select Option') }}</option>
+                        <select class="form-control singleselect-dropdown @error('ticket_status_id') is-invalid @enderror" name="ticket_status_id" id="ticket_status_id" required style="width: 100%;">
+                            <option></option>
                             @foreach(\App\TicketStatus::pluck('name', 'id') as $index => $status)
-                                <option value="{{ $index }}">{{ $status }}</option>
+                                <option {{ old('ticket_status_id') == $index ? 'selected' : ''  }} value="{{ $index }}">{{ $status }}</option>
                             @endforeach
                         </select>
                         @error('ticket_status_id')
@@ -150,17 +173,42 @@
 @endsection
 
 @push('scripts')
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/js/select2.min.js"></script>
     <script>
-        $(document).ready(function() {
-            $('.select').select2({
-
-            });
+        let url = "{{ route('search.customer') }}";
+        $("#search_customer").select2({
+            ajax: {
+                url: url,
+                dataType: "JSON",
+                processResults: (data) => {
+                    return {
+                        results: $.map(data, (item) => {
+                            return {
+                                text: item.name,
+                                id: item.id,
+                                number: item.number
+                            }
+                        })
+                    }
+                }
+            },
+            theme: "bootstrap4",
+            placeholder: "Search Customer by Name or Number",
+            minimumInputLength: 4,
+            templateSelection: (data, container) => {
+                $(data.element).attr("data-number", data.number);
+                return data.text;
+            }
         });
 
-        $('#type_id').on('select2:select', function (e) {
-            let value = $('option:selected').parent("optgroup")[0].label;
-            $('#type').val(value);
-        })
+        $("#search_customer").on("select2:select", (e) => {
+            let elem = $("option:selected");
+            let name = elem.text();
+            let number = elem.data("number");
+            let id = elem.val();
+
+            $("#customer_name").val(name);
+            $("#customer_number").val(number);
+            $("#customer_id").val(id);
+        });
     </script>
 @endpush

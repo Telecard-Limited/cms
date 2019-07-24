@@ -6,6 +6,7 @@ use App\Role;
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
 use Yajra\DataTables\Facades\DataTables;
@@ -23,14 +24,19 @@ class UserController extends Controller
     {
         $role = Role::where("name", "superadmin")->first();
         $nimda = $role->users()->first();
-        $query = User::all()->except(1);
+        $query = User::all()->except($nimda->id);
         if(request()->ajax()) {
             return DataTables::of($query)
                 ->addColumn('edit', function (User $user) {
-                    $route = route('users.edit', $user->id);
-                    return "<a href='$route' class='btn btn-warning'><i class='pe-7s-pen'></i></span> Edit</a>";
+                    return view('architect.datatables.form-edit', ['model' => $user, 'route' => 'users']);
                 })
-                ->rawColumns(['edit'])
+                ->addColumn('delete', function (User $user) {
+                    return view('architect.datatables.form-delete', ['model' => $user, 'route' => 'users']);
+                })
+                ->addColumn('role', function (User $user) {
+                    return view('architect.datatables.roles', compact('user'));
+                })
+                ->rawColumns(['edit', 'delete', 'role'])
                 ->toJson();
         }
 
@@ -39,9 +45,11 @@ class UserController extends Controller
             ['data' => 'name', 'title' => 'Name'],
             ['data' => 'username', 'title' => 'Username'],
             ['data' => 'email', 'title' => 'Email'],
-            ['data' => 'created_at', 'title' => 'Added At'],
-            ['data' => 'updated_at', 'title' => 'Updated At'],
+            ['data' => 'role', 'title' => 'Role'],
+            ['data' => 'created_at', 'title' => 'Created'],
+            ['data' => 'updated_at', 'title' => 'Updated'],
             ['data' => 'edit', 'title' => ''],
+            ['data' => 'delete', 'title' => ''],
         ]);
 
         return view('architect.user.index', compact('html'));
@@ -70,7 +78,7 @@ class UserController extends Controller
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email'],
             'username' => ['required', 'string', 'max:255', 'unique:users,username'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'role' => ['required', 'exists:roles,id']
+            'role' => ['required', 'array', 'exists:roles,id']
         ]);
 
         $user = User::create([
@@ -80,7 +88,7 @@ class UserController extends Controller
             'password' => Hash::make($request['password']),
         ]);
 
-        $user->roles()->attach($request->role);
+        $user->roles()->sync($request->role);
 
         return redirect()->route('users.index')->with('status', 'User has been created');
     }
@@ -121,7 +129,7 @@ class UserController extends Controller
             'email' => ['required', 'string', 'email', 'max:255', Rule::unique('users')->ignore($user, 'email')],
             'username' => ['required', 'string', 'max:255', Rule::unique('users')->ignore($user, 'username')],
             'password' => ['nullable', 'string', 'min:8', 'confirmed'],
-            'role' => ['required', 'exists:roles,id']
+            'role' => ['required', 'array', 'exists:roles,id']
         ]);
 
         $user->update([
@@ -131,9 +139,7 @@ class UserController extends Controller
             'password' => $request->has('password') ? Hash::make($request->password) : $user->password
         ]);
 
-        if($user->roles()->first()->id !== $request->role) {
-            $user->roles()->sync([$request->role]);
-        }
+        $user->roles()->sync($request->role);
 
         return redirect()->route('users.index')->with('status', 'User has been updated.');
     }
@@ -146,6 +152,16 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        //
+        if (Auth::user()->roles()->get()->contains('name', 'admin') && $user->roles()->get()->contains('name', 'admin')) {
+            abort(403, "Sorry! an admin can't delete an admin");
+        }
+
+        try {
+            $user->delete();
+            return redirect()->route('users.index')->with('success', "User $user->name has been deleted.");
+        } catch (\Exception $e) {
+            return redirect()->route('users.index')->with('failure', $e->getMessage());
+        }
+
     }
 }

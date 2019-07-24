@@ -81,9 +81,10 @@
                 <div class="form-group row">
                     <label for="role" class="col-form-label col-sm-2">Role</label>
                     <div class="col-sm-10">
-                        <select name="role" id="role" class="form-control @error('role') is-invalid @enderror">
+                        <select multiple="multiple" name="role[]" id="role" class="form-control multiselect-dropdown @error('role') is-invalid @enderror" required>
+                            <option></option>
                             @foreach(\App\Role::all()->except(1) as $role)
-                                <option value="{{ $role->id }}">{{ $role->desc }}</option>
+                                <option {{ collect(old('role'))->contains($role->id) ? 'selected' : ''  }} value="{{ $role->id }}">{{ $role->desc }}</option>
                             @endforeach
                         </select>
                         @error('role')
