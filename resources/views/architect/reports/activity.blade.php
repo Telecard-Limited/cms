@@ -1,7 +1,7 @@
 @extends('layouts.architect')
 
-@section('title', 'Customers')
-@section('desc', 'Backend application customer management.')
+@section('title', 'Activity Logs')
+@section('desc', 'Backend application activity logs.')
 @section('icon', 'pe-7s-note2 icon-gradient bg-arielle-smile')
 
 @push('styles')
