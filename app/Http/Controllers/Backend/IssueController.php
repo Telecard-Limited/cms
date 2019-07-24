@@ -75,7 +75,7 @@ class IssueController extends Controller
             'active' => $request->has('active') && $request->active == "on" ? true : false,
             'desc' => $request->desc ?: null
         ]);
-        return redirect()->route('department.index')->with('status', 'Issue has been created.');
+        return redirect()->route('issue.index')->with('status', 'Issue has been created.');
     }
 
     /**
@@ -119,7 +119,7 @@ class IssueController extends Controller
             'active' => $request->has('active') && $request->active == "on" ? true : false,
             'desc' => $request->desc ?: null
         ]);
-        return redirect()->route('department.index')->with('status', 'Issue has been updated.');
+        return redirect()->route('issue.index')->with('status', 'Issue has been updated.');
     }
 
     /**

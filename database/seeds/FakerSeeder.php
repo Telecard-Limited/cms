@@ -56,7 +56,7 @@ class FakerSeeder extends Seeder
 
         for ($i = 0; $i <= $issueCount; $i++) {
             \App\Issue::create([
-                'name' => \Illuminate\Support\Arr::random(['Link Down', 'Other', 'Internet Down', 'Oven Not Working', 'Electricity Issue'])
+                'name' => \Illuminate\Support\Arr::random(['Link Down', 'Other', 'Internet Down', 'Oven Not Working', 'Electricity Issue', 'Website Down'])
             ]);
         }
     }
