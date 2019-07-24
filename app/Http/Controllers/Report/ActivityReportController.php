@@ -77,7 +77,7 @@ class ActivityReportController extends Controller
                     return explode("\\", $activity->subject_type)[1];
                 })
                 ->editColumn('causer_type' , function (Activity $activity) {
-                    return explode("\\", $activity->causer_type)[1];
+                    return $activity->causer_type == null ? "NULL" : explode("\\", $activity->causer_type)[1];
                 })
                 ->editColumn('causer_id' , function (Activity $activity) {
                     return $activity->causer->name;

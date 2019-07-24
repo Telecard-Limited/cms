@@ -44,7 +44,7 @@ Route::prefix('backend')->middleware(['auth'])->group(function () {
         // Search Route
         Route::get('/searchCustomer', 'SearchController@searchCustomer')->name('search.customer');
 
-        Route::resource('customer', 'CustomerController');
+        Route::resource('customer', 'CustomerController')->except(['destroy']);
         Route::resource('complain', 'ComplainController')->except(['destroy']);
         Route::get('/export/complain', 'ComplainController@export')->name('complain.export');
 
