@@ -4,7 +4,7 @@
 
 @section('title', 'Users')
 @section('desc', 'Edit record: ' . $user->name)
-@section('icon', 'fas fa-user')
+@section('icon', 'lnr-users')
 
 @section('content')
 

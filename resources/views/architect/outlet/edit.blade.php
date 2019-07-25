@@ -4,7 +4,7 @@
 
 @section('title', 'Outlets')
 @section('desc', 'Edit Outlet: ' . $outlet->name)
-@section('icon', 'fas fa-shopping-bag')
+@section('icon', 'lnr-apartment')
 
 @section('content')
 

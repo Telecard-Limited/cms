@@ -36,13 +36,13 @@
                     <li class="app-sidebar__heading">Administration</li>
                     <li>
                         <a href="{{ route('index') }}" class="{{ request()->is('backend') ? 'mm-active' : '' }}">
-                            <i class="metismenu-icon pe-7s-rocket"></i>
+                            <i class="metismenu-icon lnr-rocket"></i>
                             Dashboard
                         </a>
                     </li>
                     <li class="{{ request()->is('*users*') ? 'mm-active' : '' }}">
                         <a href="javascript:void(0);" class="{{ request()->is('*users*') ? 'mm-active' : '' }}">
-                            <i class="metismenu-icon pe-7s-user"></i>
+                            <i class="metismenu-icon lnr-users"></i>
                             Users
                             <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
                         </a>
@@ -63,7 +63,7 @@
                     </li>
                     <li class="{{ request()->is('*customer*') ? 'mm-active' : '' }}">
                         <a href="javascript:void(0);" class="{{ request()->is('*customer*') ? 'mm-active' : '' }}">
-                            <i class="metismenu-icon pe-7s-add-user"></i>
+                            <i class="metismenu-icon pe-7s-users"></i>
                             Customer
                             <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
                         </a>
@@ -90,7 +90,7 @@
                     </li>--}}
                     <li class="{{ request()->is('*outlet*') ? 'mm-active' : '' }}">
                         <a href="javascript:void(0);" class="{{ request()->is('*outlet*') ? 'mm-active' : '' }}">
-                            <i class="metismenu-icon pe-7s-crop"></i>
+                            <i class="metismenu-icon lnr-apartment"></i>
                             Outlets
                             <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
                         </a>
@@ -132,7 +132,7 @@
                     </li>--}}
                     <li class="{{ request()->is('*issue*') ? 'mm-active' : '' }}">
                         <a href="javascript:void(0);" class="{{ request()->is('*issue/*') ? 'mm-active' : '' }}">
-                            <i class="metismenu-icon pe-7s-help1"></i>
+                            <i class="metismenu-icon lnr-calendar-full"></i>
                             Complaint Type
                             <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
                         </a>
@@ -153,7 +153,7 @@
                     </li>
                     <li class="{{ request()->is('*ticketStatus*') ? 'mm-active' : '' }}">
                         <a href="javascript:void(0);" class="{{ request()->is('*ticketStatus/*') ? 'mm-active' : '' }}">
-                            <i class="metismenu-icon pe-7s-ticket"></i>
+                            <i class="metismenu-icon lnr-tag"></i>
                             Status
                             <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
                         </a>
@@ -198,7 +198,7 @@
                     <li class="app-sidebar__heading">CRM</li>
                     <li class="{{ request()->is('*complain*') && !request()->is('*reports*') ? 'mm-active' : '' }}">
                         <a href="javascript:void(0);" class="{{ request()->is('*complain*') && !request()->is('*reports*') ? 'mm-active' : '' }}">
-                            <i class="metismenu-icon pe-7s-comment"></i>
+                            <i class="metismenu-icon lnr-bubble"></i>
                             Complaints
                             <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
                         </a>

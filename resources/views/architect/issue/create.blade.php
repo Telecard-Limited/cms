@@ -4,7 +4,7 @@
 
 @section('title', 'Issues')
 @section('desc', 'Create a new issue model.')
-@section('icon', 'fas fa-ban')
+@section('icon', 'lnr-calendar-full')
 
 @section('content')
 

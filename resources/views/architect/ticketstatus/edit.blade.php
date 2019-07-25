@@ -4,7 +4,7 @@
 
 @section('title', 'Ticket Statuses')
 @section('desc', 'Edit status: ' . $ticketStatus->name)
-@section('icon', 'pe-7s-ticket')
+@section('icon', 'lnr-tag')
 
 @section('content')
 

@@ -2,7 +2,7 @@
 
 @section('title', 'Customer')
 @section('desc', 'Edit customer: ' . $customer->name)
-@section('icon', 'pe-7s-add-user')
+@section('icon', 'pe-7s-users')
 
 @section('content')
 

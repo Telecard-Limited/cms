@@ -2,7 +2,7 @@
 
 @section('title', 'Outlets')
 @section('desc', 'Backend application outlet management.')
-@section('icon', 'fas fa-shopping-bag')
+@section('icon', 'lnr-apartment')
 
 @push('styles')
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/jszip-2.5.0/dt-1.10.18/b-1.5.6/b-colvis-1.5.6/b-flash-1.5.6/b-html5-1.5.6/b-print-1.5.6/datatables.min.css"/>

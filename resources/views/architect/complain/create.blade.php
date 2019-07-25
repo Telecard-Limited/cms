@@ -4,7 +4,7 @@
 
 @section('title', 'Complains')
 @section('desc', 'Create a new complain / ticket.')
-@section('icon', 'pe-7s-comment')
+@section('icon', 'lnr-bubble')
 
 @push('styles')
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tarekraafat/autocomplete.js@6.1.0/dist/css/autoComplete.min.css">

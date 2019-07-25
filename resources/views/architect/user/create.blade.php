@@ -4,7 +4,7 @@
 
 @section('title', 'Users')
 @section('desc', 'Create a new user model.')
-@section('icon', 'fas fa-user')
+@section('icon', 'lnr-users')
 
 @section('content')
 

@@ -4,9 +4,7 @@
 
 @section('title', 'Outlets')
 @section('desc', 'Create a new outlet model.')
-@section('icon', 'fas fa-shopping-bag')
-
-
+@section('icon', 'lnr-apartment')
 
 @section('content')
 

@@ -4,7 +4,7 @@
 
 @section('title', 'Issues')
 @section('desc', 'Edit Issue: ' . $issue->name)
-@section('icon', 'fas fa-ban')
+@section('icon', 'lnr-calendar-full')
 
 @section('content')
 
@@ -39,7 +39,7 @@
                 <div class="form-group row">
                     <label for="active" class="col-form-label col-sm-2">Active</label>
                     <div class="col-sm-10">
-                        <input id="active" class="form-control @error('active') is-invalid @enderror" type="checkbox" data-toggle="toggle" data-onstyle="success" data-offstyle="danger" {{ old('active') || $customer->active ? 'checked' : '' }}>
+                        <input id="active" class="form-control @error('active') is-invalid @enderror" type="checkbox" data-toggle="toggle" data-onstyle="success" data-offstyle="danger" {{ old('active') || $issue->active ? 'checked' : '' }}>
                         @error('active')
                         <div class="invalid-feedback">
                             <strong>{{ $message }}</strong>

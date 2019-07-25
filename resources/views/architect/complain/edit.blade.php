@@ -4,7 +4,7 @@
 
 @section('title', 'Complains')
 @section('desc', 'Edit complain / ticket #.' . $complain->id)
-@section('icon', 'pe-7s-comment')
+@section('icon', 'lnr-bubble')
 
 @section('content')
 
