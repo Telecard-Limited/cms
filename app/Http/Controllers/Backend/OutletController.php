@@ -20,7 +20,7 @@ class OutletController extends Controller
      */
     public function index(Builder $builder)
     {
-        $query = Outlet::all();
+        $query = Outlet::query()->orderBy('created_at', 'desc');
         if(request()->ajax()) {
             return DataTables::of($query)
                 ->addColumn('edit', function (Outlet $outlet) {
@@ -117,7 +117,7 @@ class OutletController extends Controller
     {
         $request->validate([
             'name' => 'required', 'string', Rule::unique('outlets', 'name')->ignore($outlet->id, 'name'),
-            'active' => 'in:on',
+            'active' => ['nullable', 'in:on'],
             'city' => ['required', 'string'],
             'desc' => ['nullable']
         ]);
@@ -139,6 +139,12 @@ class OutletController extends Controller
      */
     public function destroy(Outlet $outlet)
     {
-        //
+        try {
+            $outlet->delete();
+        } catch (\Exception $e) {
+            return redirect()->route('outlet.index')->with('failure', 'Outlet deletion failed with reason: ' . $e->getMessage());
+        }
+
+        return redirect()->route('outlet.index')->with('status', 'Outlet has been deleted.');
     }
 }

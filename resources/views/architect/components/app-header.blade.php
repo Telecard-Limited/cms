@@ -31,13 +31,7 @@
     </div>
     <div class="app-header__content">
         <div class="app-header-left">
-            <div class="search-wrapper">
-                <div class="input-holder">
-                    <input type="text" class="search-input" placeholder="Type to search">
-                    <button class="search-icon"><span></span></button>
-                </div>
-                <button class="close"></button>
-            </div>
+            {{--@include('architect.components.search')--}}
 
             {{--@include('architect.components.header-nav')--}}
 

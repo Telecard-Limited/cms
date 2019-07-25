@@ -17,7 +17,7 @@ class CustomerController extends Controller
      */
     public function index(Builder $builder)
     {
-        $query = Customer::all();
+        $query = Customer::query();
         if(request()->ajax()) {
             return DataTables::of($query)
                 ->addColumn('edit', function (Customer $customer) {
@@ -27,12 +27,15 @@ class CustomerController extends Controller
                     $route = 'customers';
                     return view('architect.datatables.form-delete', ['model' => $customer, 'route' => 'customer']);
                 })
+                ->order(function ($query) {
+                    $query->orderBy('created_at', 'desc');
+                })
                 ->rawColumns(['edit', 'delete'])
                 ->toJson();
         }
 
         $html = $builder->columns([
-            ['data' => 'id', 'title' => 'ID'],
+            ['data' => 'id', 'name' => 'id','title' => 'ID'],
             ['data' => 'name', 'title' => 'Name'],
             ['data' => 'number', 'title' => 'Number'],
             ['data' => 'created_at', 'title' => 'Created'],
@@ -69,7 +72,12 @@ class CustomerController extends Controller
             'active' => ['nullable', 'in:on']
         ]);
 
-        $customer = Customer::create($request->all());
+        $customer = new Customer;
+        $customer->name = $request->name;
+        $customer->number = $request->number;
+        $customer->active = $request->active == "on" ? true : false;
+        $customer->save();
+        return redirect()->route('customer.index')->with('status', 'Customer has been created');
     }
 
     /**
@@ -103,7 +111,18 @@ class CustomerController extends Controller
      */
     public function update(Request $request, Customer $customer)
     {
-        //
+        $request->validate([
+            'name' => ['required', 'string'],
+            'number' => ['required', 'numeric'],
+            'active' => ['nullable', 'in:on']
+        ]);
+
+        $customer->name = $request->name;
+        $customer->number = $request->number;
+        $customer->active = $request->active == "on" ? true : false;
+        $customer->update();
+
+        return redirect()->route('customer.index')->with('status', 'Customer has been updated.');
     }
 
     /**

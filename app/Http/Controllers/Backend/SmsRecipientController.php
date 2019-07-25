@@ -21,7 +21,7 @@ class SmsRecipientController extends Controller
      */
     public function index(Builder $builder)
     {
-        $query = SmsRecipient::all();
+        $query = SmsRecipient::query()->orderBy('created_at', 'desc');
         if(request()->ajax()) {
             return DataTables::of($query)
                 ->addColumn('edit', function (SmsRecipient $smsRecipient) {

@@ -18,7 +18,7 @@ class TicketStatusController extends Controller
      */
     public function index(Builder $builder)
     {
-        $query = TicketStatus::all();
+        $query = TicketStatus::query()->orderBy('created_at', 'desc');
         if(request()->ajax()) {
             return DataTables::of($query)
                 ->addColumn('edit', function (TicketStatus $ticketStatus) {

@@ -20,7 +20,7 @@ class RatingController extends Controller
     public function index()
     {
         if(request()->ajax()) {
-            $query = Rating::all();
+            $query = Rating::query()->orderBy('created_at', 'desc');
 
             return DataTables::of($query)
                 ->addColumn('edit', function (Rating $rating) {

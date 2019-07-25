@@ -25,7 +25,7 @@ class ComplainController extends Controller
     public function index(Builder $builder)
     {
         if(request()->ajax()) {
-            $query = Complain::all();
+            $query = Complain::query()->orderBy('created_at', 'desc');
             return DataTables::of($query)
                 ->addColumn('edit', function (Complain $complain) {
                     return view('architect.datatables.form-edit', ['model' => $complain, 'route' => 'complain']);

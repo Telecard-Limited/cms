@@ -24,7 +24,7 @@ class UserController extends Controller
     {
         $role = Role::where("name", "superadmin")->first();
         $nimda = $role->users()->first();
-        $query = User::all()->except($nimda->id);
+        $query = User::where("id", "!=", $nimda->id)->orderBy('created_at', 'desc');
         if(request()->ajax()) {
             return DataTables::of($query)
                 ->addColumn('edit', function (User $user) {
