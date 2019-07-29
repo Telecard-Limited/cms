@@ -39,7 +39,7 @@
                 <div class="form-group row">
                     <label for="active" class="col-form-label col-sm-2">Active</label>
                     <div class="col-sm-10">
-                        <input id="active" name="active" class="@error('active') is-invalid @enderror" type="checkbox" data-toggle="toggle" data-onstyle="success" data-offstyle="danger" {{ old('active') ? 'checked' : '' }}>
+                        <input id="active" name="active" class="@error('active') is-invalid @enderror" type="checkbox" data-toggle="toggle" data-onstyle="success" data-offstyle="danger" {{ old('active') || $ticketStatus->active ? 'checked' : '' }}>
                         @error('active')
                         <div class="invalid-feedback">
                             <strong>{{ $message }}</strong>

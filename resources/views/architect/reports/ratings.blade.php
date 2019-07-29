@@ -83,6 +83,13 @@
                             </select>
                         </div>
                     </div>
+                    <div class="form-group row">
+                        <div class="col-sm-10 offset-2">
+                            <p class="font-weight-bold">
+                                While exporting, select "All" from paginate tab to export all records.
+                            </p>
+                        </div>
+                    </div>
                     <div class="form row">
                         <div class="col-sm-10 offset-2">
                             <button class="mb-2 mr-2 btn-icon btn btn-success">

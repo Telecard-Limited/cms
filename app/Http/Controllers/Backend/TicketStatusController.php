@@ -22,18 +22,18 @@ class TicketStatusController extends Controller
         if(request()->ajax()) {
             return DataTables::of($query)
                 ->addColumn('edit', function (TicketStatus $ticketStatus) {
-                    $route = route('ticketStatus.edit', $ticketStatus->id);
-                    return "<a href='$route' class='mb-2 mr-2 btn-icon btn btn-primary'><i class='pe-7s-tools btn-icon-wrapper'></i> Edit</a>";
+                    return view('architect.datatables.form-edit', ['route' => 'ticketStatus', 'model' => $ticketStatus]);
+                })
+                ->addColumn('delete', function (TicketStatus $ticketStatus) {
+                    return view('architect.datatables.form-delete', ['route' => 'ticketStatus', 'model' => $ticketStatus]);
                 })
                 ->editColumn('active', function (TicketStatus $ticketStatus) {
-                    $outletText = $ticketStatus->active == true ? "Active" : "Inactive";
-                    $badge = $ticketStatus->active  == true ? "success" : "danger";
-                    return "<a href='javascript:void(0);' class='mb-2 mr-2 badge badge-$badge ? success : danger'>$outletText</a>";
+                    return view('architect.datatables.form-active', ['active' => $ticketStatus->active]);
                 })
                 ->editColumn('created_at', function (TicketStatus $ticketStatus) {
                     return Carbon::parse($ticketStatus->created_at)->diffForHumans();
                 })
-                ->rawColumns(['edit', 'active'])
+                ->rawColumns(['edit', 'active', 'delete'])
                 ->toJson();
         }
 
@@ -42,7 +42,8 @@ class TicketStatusController extends Controller
             ['data' => 'name', 'title' => 'Name'],
             ['data' => 'active', 'title' => 'Status'],
             ['data' => 'created_at', 'title' => 'Created At'],
-            ['data' => 'edit', 'title' => '']
+            ['data' => 'edit', 'title' => ''],
+            ['data' => 'delete', 'title' => '']
         ]);
 
         return view('architect.ticketstatus.index', compact('html'));
@@ -131,6 +132,9 @@ class TicketStatusController extends Controller
      */
     public function destroy(TicketStatus $ticketStatus)
     {
+        if($ticketStatus->complains()->count() > 1) {
+            return redirect()->route('ticketStatus.index')->with('failure', "You can't delete this status because there are tickets assigned with this status. First assign them with some other status and try again.");
+        }
         try {
             $ticketStatus->delete();
         } catch (\Exception $e) {

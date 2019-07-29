@@ -90,7 +90,7 @@
         });
 
         setInterval(function () {
-            table.ajax.reload();
+            table.ajax.reload(null, false);
         }, 5000);
 
     </script>

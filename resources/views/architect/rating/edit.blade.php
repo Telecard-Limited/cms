@@ -2,8 +2,8 @@
 
 @extends('layouts.architect')
 
-@section('title', 'Complains')
-@section('desc', 'Edit rating / ticket #.' . $rating->id)
+@section('title', 'Rating SMS Complains')
+@section('desc', 'Edit Rating / Ticket# ' . $rating->id)
 @section('icon', 'pe-7s-comment')
 
 @section('content')
