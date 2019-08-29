@@ -17,4 +17,14 @@ class Role extends Model
     {
         return $this->belongsToMany('App\User', 'role_user', 'role_id', 'user_id');
     }
+
+    public static function getAdmins()
+    {
+        return Role::where("name", "admin");
+    }
+
+    public static function getAgents()
+    {
+        return Role::where("name", "agent");
+    }
 }

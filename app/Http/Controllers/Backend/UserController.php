@@ -6,6 +6,7 @@ use App\Role;
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
@@ -154,6 +155,15 @@ class UserController extends Controller
     {
         if (Auth::user()->roles()->get()->contains('name', 'admin') && $user->roles()->get()->contains('name', 'admin')) {
             abort(403, "Sorry! an admin can't delete an admin");
+        }
+
+        if($user->has('complains')) {
+            $complains = $user->complains;
+            $admins = Role::getAdmins()->pluck("id")->toArray();
+            foreach ($complains as $complain) {
+                $complain->user_id = Arr::random($admins);
+                $complain->save();
+            }
         }
 
         try {

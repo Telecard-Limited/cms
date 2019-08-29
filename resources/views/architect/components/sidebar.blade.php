@@ -172,6 +172,33 @@
                             </li>
                         </ul>
                     </li>
+                    <li class="{{ request()->is('*messageRecipient*') ? 'mm-active' : '' }}">
+                        <a href="javascript:void(0);" class="{{ request()->is('*messageRecipient/*') ? 'mm-active' : '' }}">
+                            <i class="metismenu-icon lnr-book"></i>
+                            Message Recipients
+                            <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
+                        </a>
+                        <ul>
+                            <li>
+                                <a href="{{ route('messageRecipient.create') }}" class="{{ request()->is('*messageRecipient/create') ? 'mm-active' : '' }}">
+                                    <i class="metismenu-icon"></i>
+                                    Add
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('messageRecipient.index') }}" class="{{ request()->is('*messageRecipient') ? 'mm-active' : '' }}">
+                                    <i class="metismenu-icon">
+                                    </i>List
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="{{ request()->is('*settings*') ? 'mm-active' : '' }}">
+                        <a href="{{ route('settings.update', App\Setting::first()->id) }}" class="{{ request()->is('*settings/*') ? 'mm-active' : '' }}">
+                            <i class="metismenu-icon lnr-cog"></i>
+                            Settings
+                        </a>
+                    </li>
                     {{--<li class="{{ request()->is('*smsRecipient*') ? 'mm-active' : '' }}">
                         <a href="javascript:void(0);" class="{{ request()->is('*smsRecipient/*') ? 'mm-active' : '' }}">
                             <i class="metismenu-icon pe-7s-mail"></i>
@@ -213,6 +240,12 @@
                                 <a href="{{ route('complain.index') }}" class="{{ request()->is('*complain') ? 'mm-active' : '' }}">
                                     <i class="metismenu-icon">
                                     </i>List
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('complain.form') }}" class="{{ request()->is('*complain/search*') ? 'mm-active' : '' }}">
+                                    <i class="metismenu-icon">
+                                    </i>Search
                                 </a>
                             </li>
                         </ul>

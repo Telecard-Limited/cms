@@ -21,39 +21,59 @@ class RatingController extends Controller
     {
         if(request()->ajax()) {
             $query = Rating::query()->orderBy('created_at', 'desc');
-
-            return DataTables::of($query)
-                ->addColumn('edit', function (Rating $rating) {
-                    return view('architect.datatables.form-edit', ['model' => $rating, 'route' => 'rating']);
-                })
-                ->addColumn('class', function (Rating $rating) {
-                    return Carbon::now()->diffInMinutes($rating->created_at) <= 1 ? true : false;
-                })
-                ->editColumn('id', function (Rating $rating) {
-                    return $rating->getRatingNumber();
-                })
-                ->editColumn('outlet_id', function (Rating $rating) {
-                    return $rating->outlet->name;
-                })
-                ->editColumn('customer_name', function (Rating $rating) {
-                    return $rating->customer->name;
-                })
-                ->editColumn('customer_number', function (Rating $rating) {
-                    return $rating->customer->number;
-                })
-                ->editColumn('ticket_status_id', function (Rating $rating) {
-                    return view('architect.datatables.status', ['status' => $rating->ticket_status->name]);
-                })
-                ->editColumn('user_id', function (Rating $rating) {
-                    return $rating->created_by->name;
-                })
-                ->editColumn('issue_id', function (Rating $rating) {
-                    return view('architect.datatables.issues', ['issues' => $rating->issues]);
-                })
-                ->rawColumns(['edit', 'ticket_status_id', 'issue_id'])
-                ->toJson();
+            return $this->getQuery($query);
         }
         return view('architect.rating.index');
+    }
+
+    public function getQuery($query)
+    {
+        return DataTables::of($query)
+            ->addColumn('edit', function (Rating $rating) {
+                return view('architect.datatables.form-edit', ['model' => $rating, 'route' => 'rating']);
+            })
+            ->addColumn('class', function (Rating $rating) {
+                return Carbon::now()->diffInMinutes($rating->created_at) <= 1 ? true : false;
+            })
+            ->editColumn('id', function (Rating $rating) {
+                return $rating->getRatingNumber();
+            })
+            ->editColumn('outlet_id', function (Rating $rating) {
+                return $rating->outlet->name;
+            })
+            ->editColumn('customer_name', function (Rating $rating) {
+                return $rating->customer->name;
+            })
+            ->editColumn('customer_number', function (Rating $rating) {
+                return $rating->customer->number;
+            })
+            ->editColumn('ticket_status_id', function (Rating $rating) {
+                return view('architect.datatables.status', ['status' => $rating->ticket_status->name]);
+            })
+            ->editColumn('user_id', function (Rating $rating) {
+                return $rating->created_by->name;
+            })
+            ->editColumn('issue_id', function (Rating $rating) {
+                return view('architect.datatables.issues', ['issues' => $rating->issues]);
+            })
+            ->rawColumns(['edit', 'ticket_status_id', 'issue_id'])
+            ->toJson();
+    }
+
+    public function search(Request $request)
+    {
+        if(request()->ajax() && $request->isMethod('post')) {
+            $q = ltrim($request->q, "0");
+            $query = Rating::where("id", "like", "%$q%")->get();
+            return $this->getQuery($query);
+        } else {
+            return abort(403);
+        }
+    }
+
+    public function showSearch()
+    {
+
     }
 
     /**

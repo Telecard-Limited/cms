@@ -35,6 +35,7 @@
                         <th>Issue(s)</th>
                         <th>Created</th>
                         <th>Created By</th>
+                        <th>Informed To</th>
                         <th class="ignore"></th>
                     </tr>
                 </thead>
@@ -86,6 +87,7 @@
                 {'data' : 'issue_id', 'title' : 'Issue(s)'},
                 {'data' : 'created_at', 'title' : 'Created'},
                 {'data' : 'user_id', 'title' : 'Created By'},
+                {'data' : 'informed_to', 'title' : 'Informed To'},
                 {'data' : 'edit', 'title' : ''}
             ],
             responsive: true

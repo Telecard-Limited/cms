@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Backend;
 
+use App\Complain;
 use App\Customer;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -133,6 +134,13 @@ class CustomerController extends Controller
      */
     public function destroy(Customer $customer)
     {
+        if($customer->complains()->count() > 0) {
+            $complains = $customer->complains->map(function (Complain $complain) {
+                return $complain->getComplainNumber();
+            });
+            return redirect()->route('customer.index')->with('failure', "This customer $customer->name has complains associated with them. Please disassociate them before deleting.")->with('links', $complains);
+        }
+
         try {
             $customer->delete();
         } catch (\Exception $e) {

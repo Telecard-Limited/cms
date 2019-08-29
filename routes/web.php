@@ -36,15 +36,20 @@ Route::prefix('backend')->middleware(['auth'])->group(function () {
             Route::resource('ticketStatus', 'TicketStatusController');
             Route::resource('smsRecipient', 'SmsRecipientController');
             Route::resource('rating', 'RatingController');
+            Route::resource('messageRecipient', 'MessageRecipientController');
 
+            Route::get('settings', 'SettingController@index')->name('settings.index');
+            Route::patch('settings', 'SettingController@update')->name('settings.update');
             // Export Routes
 
         });
 
         // Search Route
         Route::get('/searchCustomer', 'SearchController@searchCustomer')->name('search.customer');
-
         Route::resource('customer', 'CustomerController');
+
+        Route::get('/complain/search', 'ComplainController@showSearch')->name('complain.form');
+        Route::post('/complain/search/query', 'ComplainController@search')->name('complain.search');
         Route::resource('complain', 'ComplainController')->except(['destroy']);
         Route::get('/export/complain', 'ComplainController@export')->name('complain.export');
 

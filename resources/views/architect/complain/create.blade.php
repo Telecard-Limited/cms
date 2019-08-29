@@ -81,7 +81,18 @@
                         </div>
                         @enderror
                     </div>
+                </div>
 
+                <div class="form-group row">
+                    <label for="informed_to" class="col-form-label col-sm-2">Informed To</label>
+                    <div class="col-sm-10">
+                        <input name="informed_to" type="text" id="informed_to" placeholder="Informed To" value="{{ old('informed_to') }}" class="form-control @error('informed_to') is-invalid @enderror">
+                        @error('informed_to')
+                        <div class="invalid-feedback">
+                            <strong>{{ $message }}</strong>
+                        </div>
+                        @enderror
+                    </div>
                 </div>
 
                 <div class="form-group row">
@@ -128,6 +139,23 @@
                             @endforeach
                         </select>
                         @error('ticket_status_id')
+                        <div class="invalid-feedback">
+                            <strong>{{ $message }}</strong>
+                        </div>
+                        @enderror
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="message_recipient_id" class="col-form-label col-sm-2">SMS Recipients</label>
+                    <div class="col-sm-10">
+                        <select class="form-control multiselect-dropdown @error('message_recipient_id') is-invalid @enderror" style="width: 100%; height: 100%" name="message_recipient_id[]" id="message_recipient_id" multiple>
+                            <option></option>
+                            @foreach(\App\MessageRecipient::pluck('name', 'id') as $index => $messageRecipient)
+                                <option {{ old('message_recipient_id') == $index ? 'selected' : ''  }} value="{{ $index }}">{{ $messageRecipient }}</option>
+                            @endforeach
+                        </select>
+                        @error('message_recipient_id')
                         <div class="invalid-feedback">
                             <strong>{{ $message }}</strong>
                         </div>

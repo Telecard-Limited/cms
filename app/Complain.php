@@ -41,4 +41,14 @@ class Complain extends Model
     {
         return $this->belongsTo('App\User', 'user_id', 'id');
     }
+
+    public function message_responses()
+    {
+        return $this->hasMany('App\MessageResponse');
+    }
+
+    public function message_recipients()
+    {
+        return $this->belongsToMany('App\MessageRecipient', 'complain_message_recipient');
+    }
 }
