@@ -43,6 +43,8 @@
         </div>
     </div>
 
+    <audio src="{{ asset('sounds/bells call 3.mp3') }}" id="soundNotification"></audio>
+
 @endsection
 
 @push('scripts')
@@ -56,9 +58,11 @@
             createdRow: function( row, data, dataIndex ) {
                 // console.log(row, data["class"], dataIndex);
                 let __class = "table-danger";
+                let __notification = document.getElementById('soundNotification');
+
                 if (data["class"] === "1" || data[0] === 1) {
                     $(row).addClass(__class);
-
+                    __notification.play();
                 }
 
             },
