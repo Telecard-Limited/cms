@@ -37,6 +37,7 @@ Route::prefix('backend')->middleware(['auth'])->group(function () {
             Route::resource('smsRecipient', 'SmsRecipientController');
             Route::resource('rating', 'RatingController');
             Route::resource('messageRecipient', 'MessageRecipientController');
+            Route::resource('category', 'CategoryController');
 
             Route::get('settings', 'SettingController@index')->name('settings.index');
             Route::patch('settings', 'SettingController@update')->name('settings.update');
@@ -46,6 +47,7 @@ Route::prefix('backend')->middleware(['auth'])->group(function () {
 
         // Search Route
         Route::get('/searchCustomer', 'SearchController@searchCustomer')->name('search.customer');
+        Route::get('/searchIssue', 'SearchController@searchIssue')->name('search.issue');
         Route::resource('customer', 'CustomerController');
 
         Route::get('/complain/search', 'ComplainController@showSearch')->name('complain.form');

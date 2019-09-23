@@ -130,6 +130,27 @@
                             </li>
                         </ul>
                     </li>--}}
+                    <li class="{{ request()->is('*category*') ? 'mm-active' : '' }}">
+                        <a href="javascript:void(0);" class="{{ request()->is('*category/*') ? 'mm-active' : '' }}">
+                            <i class="metismenu-icon lnr-bookmark"></i>
+                            Category
+                            <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
+                        </a>
+                        <ul>
+                            <li>
+                                <a href="{{ route('category.create') }}" class="{{ request()->is('*category/create') ? 'mm-active' : '' }}">
+                                    <i class="metismenu-icon"></i>
+                                    Add
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('category.index') }}" class="{{ request()->is('*category') ? 'mm-active' : '' }}">
+                                    <i class="metismenu-icon">
+                                    </i>List
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
                     <li class="{{ request()->is('*issue*') ? 'mm-active' : '' }}">
                         <a href="javascript:void(0);" class="{{ request()->is('*issue/*') ? 'mm-active' : '' }}">
                             <i class="metismenu-icon lnr-calendar-full"></i>

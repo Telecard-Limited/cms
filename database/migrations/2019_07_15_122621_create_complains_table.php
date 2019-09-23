@@ -19,6 +19,10 @@ class CreateComplainsTable extends Migration
             $table->text('desc')->nullable();
             $table->string('remarks')->nullable();
             $table->string('title')->nullable();
+            $table->string('informed_to')->nullable();
+            $table->string('informed_by')->nullable();
+            $table->dateTime('order_datetime')->nullable();
+            $table->dateTime('promised_time')->nullable();
 
             $table->unsignedBigInteger('outlet_id');
             $table->unsignedBigInteger('ticket_status_id');

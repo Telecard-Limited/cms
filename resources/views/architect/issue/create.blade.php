@@ -27,6 +27,22 @@
                 </div>
 
                 <div class="form-group row">
+                    <label for="category_id" class="col-form-label col-sm-2">Category <sup style="color: red; font-weight: bold">*</sup></label>
+                    <div class="col-sm-10">
+                        <select id="category_id" name="category_id" class="form-control singleselect-dropdown @error('category_id') is-invalid @enderror">
+                            @foreach(\App\Category::pluck('name', 'id') as $index => $category)
+                                <option value="{{ $index }}" {{ old('category_id') == $index ? 'selected' : '' }}>{{ $category }}</option>
+                            @endforeach
+                        </select>
+                        @error('active')
+                        <div class="invalid-feedback">
+                            <strong>{{ $message }}</strong>
+                        </div>
+                        @enderror
+                    </div>
+                </div>
+
+                <div class="form-group row">
                     <label for="active" class="col-form-label col-sm-2">Active</label>
                     <div class="col-sm-10">
                         <input id="active" name="active" class="@error('active') is-invalid @enderror" type="checkbox" data-toggle="toggle" data-onstyle="success" data-offstyle="danger" {{ old('active') ? 'checked' : '' }}>

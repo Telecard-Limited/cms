@@ -50,7 +50,7 @@ class FakerSeeder extends Seeder
 
         for ($i = 0; $i <= $statusCount; $i++) {
             \App\TicketStatus::create([
-                'name' => \Illuminate\Support\Arr::random(['Open', 'Closed', 'Pending', 'Re-opened', 'Following'])
+                'name' => \Illuminate\Support\Arr::random(['Open', 'Closed', 'Pending', 'Re-opened', 'Following', 'Invalid'])
             ]);
         }
 

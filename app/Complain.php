@@ -14,7 +14,7 @@ class Complain extends Model
 
     public function getComplainNumber()
     {
-        return str_pad($this->id, 8, "0", STR_PAD_LEFT);
+        return "C" . str_pad($this->id, 8, "0", STR_PAD_LEFT);
     }
 
     public function ticket_status()

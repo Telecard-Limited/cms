@@ -18,6 +18,7 @@ class CreateIssuesTable extends Migration
             $table->string('name');
             $table->text('desc')->nullable();
             $table->boolean('active')->default(true);
+            $table->unsignedBigInteger('category_id');
             $table->softDeletes();
             $table->timestamps();
         });

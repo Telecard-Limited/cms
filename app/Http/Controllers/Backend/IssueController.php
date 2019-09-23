@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Backend;
 
+use App\Category;
 use App\Issue;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -30,6 +31,9 @@ class IssueController extends Controller
                     $badge = $issue->active  == true ? "success" : "danger";
                     return "<a href='javascript:void(0);' class='mb-2 mr-2 badge badge-$badge ? success : danger'>$outletText</a>";
                 })
+                ->addColumn('category', function (Issue $issue) {
+                    return $issue->category->name;
+                })
                 ->editColumn('created_at', function (Issue $issue) {
                     return Carbon::parse($issue->created_at)->diffForHumans();
                 })
@@ -41,6 +45,7 @@ class IssueController extends Controller
             ['data' => 'id', 'title' => 'ID'],
             ['data' => 'name', 'title' => 'Name'],
             ['data' => 'active', 'title' => 'Status'],
+            ['data' => 'category', 'title' => 'Category'],
             ['data' => 'created_at', 'title' => 'Created At'],
             ['data' => 'edit', 'title' => '']
         ]);
@@ -67,10 +72,13 @@ class IssueController extends Controller
     {
         $request->validate([
             'name' => 'required', 'string', 'unique:issues,name',
+            'category_id' => ['required', 'exists:categories,id'],
             'active' => 'in:on'
         ]);
 
-        $outlet = Issue::create([
+        $category = Category::findOrFail($request->category_id);
+
+        $outlet = $category->issues()->create([
             'name' => $request->name,
             'active' => $request->has('active') && $request->active == "on" ? true : false,
             'desc' => $request->desc ?: null

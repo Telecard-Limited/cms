@@ -110,9 +110,13 @@ class ComplainController extends Controller
             'customer_name' => ['required', 'string'],
             'customer_number' => ['required'],
             'customer_id' => ['nullable', 'exists:customers,id'],
-            'title' => ['nullable', 'string'],
+            'informed_to' => ['nullable', 'string'],
+            'informed_by' => ['nullable', 'string'],
             'order_id' => ['nullable'],
+            'order_number' => ['nullable'],
+            'order_datetime' => ['nullable', 'date'],
             'outlet_id' => ['required', 'exists:outlets,id'],
+            'category_id' => ['required', 'exists:categories,id'],
             'issue_id' => ['array', 'required', 'exists:issues,id'],
             'message_recipient_id' => ['array', 'nullable', 'exists:message_recipients,id'],
             'ticket_status_id' => ['required', 'exists:ticket_statuses,id'],
@@ -131,6 +135,8 @@ class ComplainController extends Controller
         $complain = new Complain();
         $complain->title = $request->title;
         $complain->order_id = $request->order_id;
+        $complain->order_datetime = Carbon::parse($request->order_datetime);
+        $complain->promised_time = Carbon::parse($request->promised_time);
         $complain->outlet_id = $request->outlet_id;
         $complain->ticket_status_id = $request->ticket_status_id;
         $complain->user_id = Auth::user()->id;
@@ -138,6 +144,7 @@ class ComplainController extends Controller
         $complain->desc = $request->desc;
         $complain->remarks = $request->remarks;
         $complain->informed_to = $request->informed_to;
+        $complain->informed_by = $request->informed_by;
         $complain->save();
 
         $complain->issues()->sync($request->issue_id);
@@ -145,7 +152,7 @@ class ComplainController extends Controller
 
         event(new SendSMSEvent($complain));
 
-        return redirect()->route('complain.index')->with('status', "Complain has been created with number: $complain->id");
+        return redirect()->route('complain.index')->with('status', "Complain has been created with number: " . $complain->getComplainNumber());
 
     }
 

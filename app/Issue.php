@@ -23,4 +23,9 @@ class Issue extends Model
     {
         return $this->belongsToMany('App\Rating', 'issue_rating');
     }
+
+    public function category()
+    {
+        return $this->belongsTo('App\Category');
+    }
 }

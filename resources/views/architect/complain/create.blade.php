@@ -18,7 +18,7 @@
                 @csrf
 
                 <div class="form-group row">
-                    <label for="name" class="col-form-label col-sm-2">Search Customer</label>
+                    <label for="search_customer" class="col-form-label col-sm-2">Search Customer</label>
                     <div class="col-sm-10">
                         <select class="form-control" type="text" id="search_customer">
                             <option></option>
@@ -36,7 +36,7 @@
 
                 <div class="form-group">
                     <div class="row">
-                        <label for="name" class="col-form-label col-sm-2">Customer Name <sup style="color:red;">*</sup></label>
+                        <label for="customer_name" class="col-form-label col-sm-2">Customer Name <sup style="color:red;">*</sup></label>
                         <div class="col-sm-4">
                             <input name="customer_name" type="text" id="customer_name" placeholder="Customer Name" value="{{ old('customer_name') }}" class="form-control @error('customer_name') is-invalid @enderror">
                             @error('customer_name')
@@ -46,7 +46,7 @@
                             @enderror
                         </div>
 
-                        <label for="name" class="col-form-label col-sm-2">Customer Number <sup style="color:red;">*</sup></label>
+                        <label for="customer_number" class="col-form-label col-sm-2">Customer Number <sup style="color:red;">*</sup></label>
                         <div class="col-sm-4">
                             <input name="customer_number" type="text" id="customer_number" placeholder="Customer Number" value="{{ old('customer_number') }}" class="form-control @error('customer_number') is-invalid @enderror">
                             @error('customer_number')
@@ -59,16 +59,27 @@
                 </div>
 
                 <div class="form-group row">
-                    <label for="title" class="col-form-label col-sm-2">Complain Title</label>
+                    <label for="informed_to" class="col-form-label col-sm-2">Informed To</label>
                     <div class="col-sm-10">
-                        <input name="title" type="text" id="title" placeholder="Title" value="{{ old('title') }}" class="form-control @error('title') is-invalid @enderror">
-                        @error('title')
+                        <input name="informed_to" type="text" id="informed_to" placeholder="Informed To" value="{{ old('informed_to') }}" class="form-control @error('informed_to') is-invalid @enderror">
+                        @error('informed_to')
                         <div class="invalid-feedback">
                             <strong>{{ $message }}</strong>
                         </div>
                         @enderror
                     </div>
+                </div>
 
+                <div class="form-group row">
+                    <label for="informed_by" class="col-form-label col-sm-2">Informed By</label>
+                    <div class="col-sm-10">
+                        <input name="informed_by" type="text" id="informed_by" placeholder="Informed By" value="{{ old('informed_by') }}" class="form-control @error('informed_by') is-invalid @enderror">
+                        @error('informed_by')
+                        <div class="invalid-feedback">
+                            <strong>{{ $message }}</strong>
+                        </div>
+                        @enderror
+                    </div>
                 </div>
 
                 <div class="form-group row">
@@ -84,10 +95,32 @@
                 </div>
 
                 <div class="form-group row">
-                    <label for="informed_to" class="col-form-label col-sm-2">Informed To</label>
+                    <label for="order_datetime" class="col-form-label col-sm-2">Order Date/Time <sup style="color: red;">*</sup></label>
                     <div class="col-sm-10">
-                        <input name="informed_to" type="text" id="informed_to" placeholder="Informed To" value="{{ old('informed_to') }}" class="form-control @error('informed_to') is-invalid @enderror">
-                        @error('informed_to')
+                        <div class="input-group date" id="datetimepicker1" data-target-input="nearest">
+                            <input name="order_datetime" id="order_datetime" type="text" class="form-control datetimepicker-input @error('order_datetime') is-invalid @enderror" data-target="#datetimepicker1" required />
+                            <div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">
+                                <div class="input-group-text"><i class="fas fa-calendar"></i></div>
+                            </div>
+                        </div>
+                        @error('order_datetime')
+                        <div class="invalid-feedback">
+                            <strong>{{ $message }}</strong>
+                        </div>
+                        @enderror
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="promised_time" class="col-form-label col-sm-2">Promised Date/Time</label>
+                    <div class="col-sm-10">
+                        <div class="input-group date" id="datetimepicker2" data-target-input="nearest">
+                            <input name="promised_time" id="promised_time" type="text" class="form-control datetimepicker-input @error('promised_time') is-invalid @enderror" data-target="#datetimepicker2" disabled />
+                            <div class="input-group-append" data-target="#datetimepicker2" data-toggle="datetimepicker">
+                                <div class="input-group-text"><i class="fas fa-calendar"></i></div>
+                            </div>
+                        </div>
+                        @error('promised_time')
                         <div class="invalid-feedback">
                             <strong>{{ $message }}</strong>
                         </div>
@@ -113,13 +146,26 @@
                 </div>
 
                 <div class="form-group row">
-                    <label for="issue_id" class="col-form-label col-sm-2">Complaint Type <sup style="color:red;">*</sup></label>
+                    <label for="category_id" class="col-form-label col-sm-2">Complaint Category <sup style="color:red;">*</sup></label>
                     <div class="col-sm-10">
-                        <select class="form-control multiselect-dropdown @error('issue_id') is-invalid @enderror" style="width: 100%;" name="issue_id[]" multiple id="issue_id" required>
+                        <select class="form-control multiselect-dropdown @error('category_id') is-invalid @enderror" style="width: 100%;" name="category_id" id="category_id" required>
                             <option></option>
-                            @foreach(\App\Issue::pluck('name', 'id') as $index => $issue)
-                                <option {{ old('issue_id') == $index ? 'selected' : ''  }} value="{{ $index }}">{{ $issue }}</option>
+                            @foreach(\App\Category::pluck('name', 'id') as $index => $issue)
+                                <option {{ old('category_id') == $index ? 'selected' : ''  }} value="{{ $index }}">{{ $issue }}</option>
                             @endforeach
+                        </select>
+                        @error('category_id')
+                        <div class="invalid-feedback">
+                            <strong>{{ $message }}</strong>
+                        </div>
+                        @enderror
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="issue_id" class="col-form-label col-sm-2">Issue(s) <sup style="color:red;">*</sup></label>
+                    <div class="col-sm-10">
+                        <select class="form-control multiselect-dropdown @error('issue_id') is-invalid @enderror" style="width: 100%;" name="issue_id[]" multiple id="issue_id" required disabled>
                         </select>
                         @error('issue_id')
                         <div class="invalid-feedback">
@@ -164,6 +210,18 @@
                 </div>
 
                 <div class="form-group row">
+                    <label for="desc" class="col-form-label col-sm-2">Description</label>
+                    <div class="col-sm-10">
+                        <textarea rows="3" name="desc" id="desc" placeholder="Description" class="form-control @error('desc') is-invalid @enderror">{{ old('desc') }}</textarea>
+                        @error('desc')
+                        <div class="invalid-feedback">
+                            <strong>{{ $message }}</strong>
+                        </div>
+                        @enderror
+                    </div>
+                </div>
+
+                <div class="form-group row">
                     <label for="remarks" class="col-form-label col-sm-2">Remarks / Feedback</label>
                     <div class="col-sm-10">
                         <textarea rows="3" name="remarks" id="remarks" placeholder="Remarks / Feedback" class="form-control @error('desc') is-invalid @enderror">{{ old('remarks') }}</textarea>
@@ -176,20 +234,8 @@
                 </div>
 
                 <div class="form-group row">
-                    <label for="desc" class="col-form-label col-sm-2">Description</label>
-                    <div class="col-sm-10">
-                        <textarea rows="3" name="desc" id="name" placeholder="Description" class="form-control @error('desc') is-invalid @enderror">{{ old('desc') }}</textarea>
-                        @error('desc')
-                        <div class="invalid-feedback">
-                            <strong>{{ $message }}</strong>
-                        </div>
-                        @enderror
-                    </div>
-                </div>
-
-                <div class="form-group row">
                     <div class="col-sm-10 offset-sm-2">
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="submit" class="btn btn-primary"><i class="fas fa-cogs"></i> SUBMIT</button>
                     </div>
                 </div>
 
@@ -203,6 +249,26 @@
 @push('scripts')
     <script>
         let url = "{{ route('search.customer') }}";
+        let url2 = "{{ route('search.issue') }}";
+
+        $.fn.datetimepicker.Constructor.Default = $.extend({}, $.fn.datetimepicker.Constructor.Default, {
+            icons: {
+                time: 'fas fa-clock',
+                date: 'fas fa-calendar',
+                up: 'fas fa-arrow-up',
+                down: 'fas fa-arrow-down',
+                previous: 'fas fa-chevron-left',
+                next: 'fas fa-chevron-right',
+                today: 'fas fa-calendar-check-o',
+                clear: 'fas fa-trash',
+                close: 'fas fa-times'
+            } });
+
+        $('#datetimepicker1').datetimepicker();
+        $('#datetimepicker2').datetimepicker();
+
+
+
         $("#search_customer").select2({
             ajax: {
                 url: url,
@@ -227,6 +293,46 @@
                 return data.text;
             }
         });
+
+        $("#category_id").on("select2:select", (e) => {
+            let elem = $("#category_id option:selected");
+            let category = elem.val();
+            $('#issue_id').empty().trigger("change");
+            $.ajax({
+                url: url2,
+                dataType: 'JSON',
+                data: {
+                    _token: '{!! csrf_token() !!}',
+                    category: category
+                },
+                success: function (data) {
+                    let __data = $.map(data, (item) => {
+                        return {
+                            text: item.name,
+                            id: item.id
+                        }
+                    });
+                    $("#issue_id").select2({
+                        data: __data,
+                        theme: "bootstrap4"
+                    }).attr('disabled', false);
+                }
+            })
+        });
+
+        $("#issue_id").on("select2:select", (e) => {
+            let name = $("#issue_id option:selected").text();
+            if(name === "Late Delivery") {
+                $("#promised_time").attr("disabled", false).attr("required", true);
+            }
+        });
+
+        $("#issue_id").on("select2:unselect", (e) => {
+            if(e.params.data.text === "Late Delivery") {
+                $("#promised_time").attr("disabled", true).attr("required", false);
+            }
+        });
+
 
         $("#search_customer").on("select2:select", (e) => {
             let elem = $("option:selected");
