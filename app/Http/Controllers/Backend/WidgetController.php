@@ -23,12 +23,12 @@ class WidgetController extends Controller
                 return response()->json(Rating::all()->count());
                 break;
             case "openTickets":
-                $status = TicketStatus::where("name", "Open")->first()->complains()->count();
+                $status = TicketStatus::where("name", "Open")->firstorNull()->complains()->count();
                 $total = Complain::all()->count();
                 $percent = $total == 0 ? 0 : number_format($status/$total * 100);
                 return response()->json("$percent%");
             case "closedTickets":
-                $status = TicketStatus::where("name", "Closed")->first()->complains()->count();
+                $status = TicketStatus::where("name", "Closed")->firstorNull()->complains()->count();
                 $total = Complain::all()->count();
                 $percent = $total == 0 ? 0 : number_format($status/$total * 100);
                 return response()->json("$percent%");
