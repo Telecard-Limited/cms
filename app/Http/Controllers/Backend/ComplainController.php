@@ -182,46 +182,19 @@ class ComplainController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Backend\Complain  $complain
-     * @return \Illuminate\Http\Response
+     * @param  Complain  $complain
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\Response
      */
     public function update(Request $request, Complain $complain)
     {
         $request->validate([
-            "customer_name" => ["required", "string"],
-            "customer_number" => ["required", "string"],
-            "customer_id" => ["required", "exists:customers,id"],
-            "title" => ["string"],
-            "order_id" => ["nullable"],
-            "outlet_id" => ["required", "exists:outlets,id"],
-            "issue_id" => ["array", "required", "exists:issues,id"],
-            'message_recipient_id' => ['array', 'nullable', 'exists:message_recipients,id'],
             "ticket_status_id" => ["required", "exists:ticket_statuses,id"],
-            'informed_to' => ['string']
         ]);
 
-        if($request->customer_name !== $complain->customer->name ||
-            $request->customer_number !== $complain->customer->number) {
-            // Update Customer
-
-            $customer = Customer::findOrFail($request->customer_id);
-            $customer->name = $request->customer_name;
-            $customer->number = $request->customer_number;
-            $customer->save();
-        }
-
-        $complain->title = $request->title;
-        $complain->order_id = $request->order_id;
-        $complain->outlet_id = $request->outlet_id;
-        $complain->ticket_status_id = $request->ticket_status_id;
-        $complain->customer_id = $request->customer_id;
-        $complain->desc = $request->desc;
         $complain->remarks = $request->remarks;
-        $complain->informed_to = $request->informed_to;
-        $complain->update();
-
-        $complain->issues()->sync($request->issue_id);
-        $complain->message_recipients()->sync($request->message_recipient_id);
+        $complain->desc = $request->description;
+        $complain->ticket_status()->associate($request->ticket_status_id);
+        $complain->save();
 
         event(new SendSMSEvent($complain));
 
