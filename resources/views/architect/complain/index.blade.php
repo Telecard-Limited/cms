@@ -27,10 +27,9 @@
                     <tr>
                         <th>Complain #</th>
                         <th>Order ID</th>
+                        <th>Order Time</th>
                         <th>Customer</th>
-                        <th>Customer #</th>
                         <th>Outlet</th>
-                        <th>Title</th>
                         <th>Status</th>
                         <th>Issue(s)</th>
                         <th>Created</th>
@@ -83,10 +82,9 @@
             columns: [
                 {'data' : 'id', 'title' : 'Complain #'},
                 {'data' : 'order_id', 'title' : 'Order #'},
+                {'data' : 'order_datetime', 'title' : 'Order Time'},
                 {'data' : 'customer_name', 'title' : 'Customer'},
-                {'data' : 'customer_number', 'title' : 'Customer #'},
                 {'data' : 'outlet_id', 'title' : 'Outlet'},
-                {'data' : 'title', 'title' : 'Title'},
                 {'data' : 'ticket_status_id', 'title' : 'Status'},
                 {'data' : 'issue_id', 'title' : 'Issue(s)'},
                 {'data' : 'created_at', 'title' : 'Created'},

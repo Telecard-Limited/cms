@@ -51,11 +51,11 @@ class ComplainController extends Controller
             ->editColumn('customer_name', function (Complain $complain) {
                 return $complain->customer->name;
             })
-            ->editColumn('customer_number', function (Complain $complain) {
-                return $complain->customer->number;
-            })
             ->editColumn('ticket_status_id', function (Complain $complain) {
                 return view('architect.datatables.status', ['status' => $complain->ticket_status->name]);
+            })
+            ->editColumn('order_datetime', function (Complain $complain) {
+                return Carbon::parse($complain->order_datetime)->toDayDateTimeString();
             })
             ->editColumn('user_id', function (Complain $complain) {
                 return $complain->created_by->name;
@@ -102,14 +102,12 @@ class ComplainController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\Response
      */
     public function store(Request $request)
     {
         $request->validate([
             'customer_name' => ['required', 'string'],
-            'customer_number' => ['required'],
-            'customer_id' => ['nullable', 'exists:customers,id'],
             'informed_to' => ['nullable', 'string'],
             'informed_by' => ['nullable', 'string'],
             'order_id' => ['nullable'],
@@ -128,31 +126,37 @@ class ComplainController extends Controller
         } else {
             $customer = Customer::create([
                 'name' => $request->customer_name,
-                'number' => $request->customer_number
+                'number' => ''
             ]);
         }
 
-        $complain = new Complain();
-        $complain->title = $request->title;
-        $complain->order_id = $request->order_id;
-        $complain->order_datetime = Carbon::parse($request->order_datetime);
-        $complain->promised_time = Carbon::parse($request->promised_time);
-        $complain->outlet_id = $request->outlet_id;
-        $complain->ticket_status_id = $request->ticket_status_id;
-        $complain->user_id = Auth::user()->id;
-        $complain->customer_id = $customer->id;
-        $complain->desc = $request->desc;
-        $complain->remarks = $request->remarks;
-        $complain->informed_to = $request->informed_to;
-        $complain->informed_by = $request->informed_by;
-        $complain->save();
+        $newComplains = [];
 
-        $complain->issues()->sync($request->issue_id);
-        $complain->message_recipients()->sync($request->message_recipient_id);
+        foreach ($request->issue_id as $key => $item) {
+            $complain = new Complain();
+            $complain->title = $request->title;
+            $complain->order_id = $request->order_id;
+            $complain->order_datetime = Carbon::parse($request->order_datetime);
+            $complain->promised_time = Carbon::parse($request->promised_time);
+            $complain->outlet_id = $request->outlet_id;
+            $complain->ticket_status_id = $request->ticket_status_id;
+            $complain->user_id = Auth::user()->id;
+            $complain->customer_id = $customer->id;
+            $complain->desc = $request->get("desc_$item");
+            $complain->remarks = $request->remarks;
+            $complain->informed_to = $request->informed_to;
+            $complain->informed_by = $request->informed_by;
+            $complain->save();
+
+            $complain->issues()->sync([$item]);
+            $complain->message_recipients()->sync($request->message_recipient_id);
+
+            $newComplains[$key] = $complain->getComplainNumber();
+        }
 
         event(new SendSMSEvent($complain));
 
-        return redirect()->route('complain.index')->with('status', "Complain has been created with number: " . $complain->getComplainNumber());
+        return redirect()->route('complain.index')->with('status', "Complain(s) have been created with number(s): " . collect($newComplains)->implode(", "));
 
     }
 
