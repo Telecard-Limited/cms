@@ -71,7 +71,7 @@ class ComplainSourceController extends Controller
         ]);
 
         $source = ComplainSource::create($request->all());
-        return redirect()->route('source.index')->with('success', "Complain source $source->name has been created.");
+        return redirect()->route('complainSource.index')->with('success', "Complain source $source->name has been created.");
     }
 
     /**
@@ -101,7 +101,7 @@ class ComplainSourceController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\ComplainSource  $complainSource
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\Response
      */
     public function update(Request $request, ComplainSource $complainSource)
     {
