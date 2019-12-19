@@ -25,17 +25,23 @@
             <table style="width: 100%;" id="dataTable" class="table table-bordered">
                 <thead>
                     <tr>
-                        <th>Complain #</th>
-                        <th>Order ID</th>
-                        <th>Order Time</th>
-                        <th>Customer</th>
+                        <th>Complain#</th>
+                        <th>Order#</th>
+                        <th>Customer Name</th>
+                        <th>Customer#</th>
                         <th>Outlet</th>
                         <th>Status</th>
-                        <th>Issue(s)</th>
-                        <th>Created</th>
-                        <th>Created By</th>
+                        <th>Category</th>
+                        <th>Issue</th>
+                        <th>Order Date</th>
                         <th>Informed To</th>
-                        <th class="ignore"></th>
+                        <th>Informed By</th>
+                        <th>Description</th>
+                        <th>Remarks</th>
+                        <th>Platform</th>
+                        <th>Created At</th>
+                        <th>Created By</th>
+                        <th></th>
                     </tr>
                 </thead>
             </table>
@@ -82,14 +88,20 @@
             columns: [
                 {'data' : 'id', 'title' : 'Complain #'},
                 {'data' : 'order_id', 'title' : 'Order #'},
-                {'data' : 'order_datetime', 'title' : 'Order Time'},
-                {'data' : 'customer_name', 'title' : 'Customer'},
+                {'data' : 'customer_name', 'title' : 'Customer Name'},
+                {'data' : 'customer_number', 'title' : 'Customer #'},
                 {'data' : 'outlet_id', 'title' : 'Outlet'},
                 {'data' : 'ticket_status_id', 'title' : 'Status'},
-                {'data' : 'issue_id', 'title' : 'Issue(s)'},
-                {'data' : 'created_at', 'title' : 'Created'},
-                {'data' : 'user_id', 'title' : 'Created By'},
+                {'data' : 'category', 'title' : 'Category'},
+                {'data' : 'issue_id', 'title' : 'Issue'},
+                {'data' : 'order_datetime', 'title' : 'Order Date'},
                 {'data' : 'informed_to', 'title' : 'Informed To'},
+                {'data' : 'informed_by', 'title' : 'Informed By'},
+                {'data' : 'desc', 'title' : 'Description'},
+                {'data' : 'remarks', 'title' : 'Remarks'},
+                {'data' : 'complain_source_id', 'title' : 'Platform'},
+                {'data' : 'created_at', 'title' : 'Created At'},
+                {'data' : 'user_id', 'title' : 'Created By'},
                 {'data' : 'edit', 'title' : ''}
             ],
             responsive: true

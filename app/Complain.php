@@ -51,4 +51,14 @@ class Complain extends Model
     {
         return $this->belongsToMany('App\MessageRecipient', 'complain_message_recipient');
     }
+
+    public function complain_source()
+    {
+        return $this->belongsTo('App\ComplainSource');
+    }
+
+    public function category()
+    {
+        return $this->belongsTo('App\Category');
+    }
 }

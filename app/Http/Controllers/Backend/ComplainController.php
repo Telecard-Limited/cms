@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Complain;
+use App\ComplainSource;
 use App\Customer;
 use App\Department;
 use App\Events\SendSMSEvent;
@@ -21,7 +22,7 @@ class ComplainController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View || @return View
      */
     public function index(Builder $builder)
     {
@@ -51,6 +52,9 @@ class ComplainController extends Controller
             ->editColumn('customer_name', function (Complain $complain) {
                 return $complain->customer->name;
             })
+            ->editColumn('customer_number', function (Complain $complain) {
+                return $complain->customer->number;
+            })
             ->editColumn('ticket_status_id', function (Complain $complain) {
                 return view('architect.datatables.status', ['status' => $complain->ticket_status->name]);
             })
@@ -62,6 +66,12 @@ class ComplainController extends Controller
             })
             ->editColumn('issue_id', function (Complain $complain) {
                 return view('architect.datatables.issues', ['issues' => $complain->issues]);
+            })
+            ->addColumn('complain_source_id', function (Complain $complain) {
+                return $complain->complain_source->name ?? "N/A";
+            })
+            ->addColumn('category', function (Complain $complain) {
+                return $complain->issues()->first()->category->name;
             })
             ->rawColumns(['edit', 'ticket_status_id', 'issue_id', 'id'])
             ->toJson();
@@ -108,6 +118,8 @@ class ComplainController extends Controller
     {
         $request->validate([
             'customer_name' => ['required', 'string'],
+            'customer_number' => ['required', 'numeric'],
+            'customer_id' => ['nullable', 'exists:customers,id'],
             'informed_to' => ['nullable', 'string'],
             'informed_by' => ['nullable', 'string'],
             'order_id' => ['nullable'],
@@ -118,7 +130,7 @@ class ComplainController extends Controller
             'issue_id' => ['array', 'required', 'exists:issues,id'],
             'message_recipient_id' => ['array', 'nullable', 'exists:message_recipients,id'],
             'ticket_status_id' => ['required', 'exists:ticket_statuses,id'],
-            'informed_to' => ['string']
+            'complain_source_id' => ['required', 'exists:complain_sources,id'],
         ]);
 
         if($request->customer_id !== null) {
@@ -126,7 +138,7 @@ class ComplainController extends Controller
         } else {
             $customer = Customer::create([
                 'name' => $request->customer_name,
-                'number' => ''
+                'number' => $request->customer_number
             ]);
         }
 
@@ -146,15 +158,16 @@ class ComplainController extends Controller
             $complain->remarks = $request->remarks;
             $complain->informed_to = $request->informed_to;
             $complain->informed_by = $request->informed_by;
+            $complain->complain_source()->associate($request->complain_source_id);
             $complain->save();
 
             $complain->issues()->sync([$item]);
             $complain->message_recipients()->sync($request->message_recipient_id);
 
             $newComplains[$key] = $complain->getComplainNumber();
-        }
 
-        event(new SendSMSEvent($complain));
+            event(new SendSMSEvent($complain));
+        }
 
         return redirect()->route('complain.index')->with('status', "Complain(s) have been created with number(s): " . collect($newComplains)->implode(", "));
 

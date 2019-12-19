@@ -107,15 +107,21 @@
             <table id="datatable" style="width: 100%;" class="table table-borderless table-striped">
                 <thead>
                 <tr>
-                    <th>Complain #</th>
-                    <th>Order ID</th>
-                    <th>Customer</th>
-                    <th>Customer #</th>
+                    <th>Complain#</th>
+                    <th>Order#</th>
+                    <th>Customer Name</th>
+                    <th>Customer#</th>
                     <th>Outlet</th>
-                    <th>Title</th>
                     <th>Status</th>
-                    <th>Issue(s)</th>
-                    <th>Created</th>
+                    <th>Category</th>
+                    <th>Issue</th>
+                    <th>Order Date</th>
+                    <th>Informed To</th>
+                    <th>Informed By</th>
+                    <th>Description</th>
+                    <th>Remarks</th>
+                    <th>Platform</th>
+                    <th>Created At</th>
                     <th>Created By</th>
                 </tr>
                 </thead>
@@ -146,14 +152,20 @@
             let columns = [
                 {'data' : 'id', 'title' : 'Complain #'},
                 {'data' : 'order_id', 'title' : 'Order #'},
-                {'data' : 'customer_name', 'title' : 'Customer'},
+                {'data' : 'customer_name', 'title' : 'Customer Name'},
                 {'data' : 'customer_number', 'title' : 'Customer #'},
                 {'data' : 'outlet_id', 'title' : 'Outlet'},
-                {'data' : 'title', 'title' : 'Title'},
                 {'data' : 'ticket_status_id', 'title' : 'Status'},
-                {'data' : 'issue_id', 'title' : 'Issue(s)'},
-                {'data' : 'created_at', 'title' : 'Created'},
-                {'data' : 'user_id', 'title' : 'Created By'}
+                {'data' : 'category', 'title' : 'Category'},
+                {'data' : 'issue_id', 'title' : 'Issue'},
+                {'data' : 'order_datetime', 'title' : 'Order Date'},
+                {'data' : 'informed_to', 'title' : 'Informed To'},
+                {'data' : 'informed_by', 'title' : 'Informed By'},
+                {'data' : 'desc', 'title' : 'Description'},
+                {'data' : 'remarks', 'title' : 'Remarks'},
+                {'data' : 'complain_source_id', 'title' : 'Platform'},
+                {'data' : 'created_at', 'title' : 'Created At'},
+                {'data' : 'user_id', 'title' : 'Created By'},
             ];
 
             let start = moment().startOf('day');

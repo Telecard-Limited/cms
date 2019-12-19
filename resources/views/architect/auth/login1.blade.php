@@ -36,34 +36,32 @@
                                             <span>{{ __('Please sign in to your account below.') }}</span>
                                         </h4>
                                     </div>
-
-
-                                        <div class="form-row">
-                                            <div class="col-md-12">
-                                                <div class="position-relative form-group">
-                                                    <input name="login" id="login" value="{{ old('username') ?: old('email') }}" placeholder="{{ __('Username or E-Mail') }}" type="text" class="form-control {{ $errors->has('email') || $errors->has('username') ? 'is-invalid' : '' }}" required>
-                                                    @if ($errors->has('username') || $errors->has('email'))
-                                                        <span class="invalid-feedback">
-                                                            <strong>{{ $errors->first('username') ?: $errors->first('email') }}</strong>
-                                                        </span>
-                                                    @endif
-                                                </div>
-                                            </div>
-                                            <div class="col-md-12">
-                                                <div class="position-relative form-group">
-                                                    <input name="password" id="password" placeholder="{{ __('Password') }}" type="password" class="form-control @error('password') is-invalid @enderror" required>
-                                                    @error('password')
-                                                    <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $message }}</strong>
+                                    <div class="form-row">
+                                        <div class="col-md-12">
+                                            <div class="position-relative form-group">
+                                                <input name="login" id="login" value="{{ old('username') ?: old('email') }}" placeholder="{{ __('Username or E-Mail') }}" type="text" class="form-control {{ $errors->has('email') || $errors->has('username') ? 'is-invalid' : '' }}" required>
+                                                @if ($errors->has('username') || $errors->has('email'))
+                                                    <span class="invalid-feedback">
+                                                        <strong>{{ $errors->first('username') ?: $errors->first('email') }}</strong>
                                                     </span>
-                                                    @enderror
-                                                </div>
+                                                @endif
                                             </div>
                                         </div>
-                                        <div class="position-relative form-check">
-                                            <input name="remember" id="remember" type="checkbox" value="{{ old('remember') }}" class="form-check-input">
-                                            <label for="remember" class="form-check-label">{{ __('Keep me logged in') }}</label>
+                                        <div class="col-md-12">
+                                            <div class="position-relative form-group">
+                                                <input name="password" id="password" placeholder="{{ __('Password') }}" type="password" class="form-control @error('password') is-invalid @enderror" required>
+                                                @error('password')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                                @enderror
+                                            </div>
                                         </div>
+                                    </div>
+                                    <div class="position-relative form-check">
+                                        <input name="remember" id="remember" type="checkbox" value="{{ old('remember') }}" class="form-check-input">
+                                        <label for="remember" class="form-check-label">{{ __('Keep me logged in') }}</label>
+                                    </div>
 
     {{--                                <div class="divider"></div>--}}
     {{--                                <h6 class="mb-0">No account? <a href="javascript:void(0);" class="text-primary">Sign up now</a></h6>--}}

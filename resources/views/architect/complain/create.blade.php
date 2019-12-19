@@ -64,7 +64,7 @@
                     </div>
                 </div>
 
-                {{--<div class="form-group row">
+                <div class="form-group row">
                     <label for="search_customer" class="col-form-label col-sm-2">Search Customer</label>
                     <div class="col-sm-10">
                         <select class="form-control" type="text" id="search_customer">
@@ -77,14 +77,14 @@
                     <div class="col-sm-6 offset-sm-6">
                         <h4 class="font-weight-bold"><i>OR</i></h4>
                     </div>
-                </div>--}}
+                </div>
 
-                {{--<input type="hidden" name="customer_id" id="customer_id">--}}
+                <input type="hidden" name="customer_id" id="customer_id">
 
                 <div class="form-group">
                     <div class="row">
                         <label for="customer_name" class="col-form-label col-sm-2">Customer Name <sup style="color:red;">*</sup></label>
-                        <div class="col-sm-10">
+                        <div class="col-sm-4">
                             <input name="customer_name" type="text" id="customer_name" placeholder="Customer Name" value="{{ old('customer_name') }}" class="form-control @error('customer_name') is-invalid @enderror">
                             @error('customer_name')
                             <div class="invalid-feedback">
@@ -93,7 +93,7 @@
                             @enderror
                         </div>
 
-                        {{--<label for="customer_number" class="col-form-label col-sm-2">Customer Number <sup style="color:red;">*</sup></label>
+                        <label for="customer_number" class="col-form-label col-sm-2">Customer Number <sup style="color:red;">*</sup></label>
                         <div class="col-sm-4">
                             <input name="customer_number" type="text" id="customer_number" placeholder="Customer Number" value="{{ old('customer_number') }}" class="form-control @error('customer_number') is-invalid @enderror">
                             @error('customer_number')
@@ -101,7 +101,7 @@
                                 <strong>{{ $message }}</strong>
                             </div>
                             @enderror
-                        </div>--}}
+                        </div>
                     </div>
                 </div>
 
@@ -187,6 +187,23 @@
                             @endforeach
                         </select>
                         @error('ticket_status_id')
+                        <div class="invalid-feedback">
+                            <strong>{{ $message }}</strong>
+                        </div>
+                        @enderror
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="complain_source_id" class="col-form-label col-sm-2">Complain Source <sup style="color:red;">*</sup></label>
+                    <div class="col-sm-10">
+                        <select class="form-control singleselect-dropdown @error('complain_source_id') is-invalid @enderror" name="complain_source_id" id="complain_source_id" required style="width: 100%; height: 100%;">
+                            <option></option>
+                            @foreach(\App\ComplainSource::pluck('name', 'id') as $index => $status)
+                                <option {{ old('complain_source_id') == $index ? 'selected' : ''  }} value="{{ $index }}">{{ $status }}</option>
+                            @endforeach
+                        </select>
+                        @error('complain_source_id')
                         <div class="invalid-feedback">
                             <strong>{{ $message }}</strong>
                         </div>
@@ -294,7 +311,19 @@
                 $(data.element).attr("data-number", data.number);
                 return data.text;
             }
-        });
+        })
+            .on("select2:select", (e) => {
+                var data = e.params.data;
+                console.log(data);
+
+                let name = data.text;
+                let number = data.number;
+                let id = data.id;
+
+                $("#customer_name").val(name);
+                $("#customer_number").val(number);
+                $("#customer_id").val(id);
+            });
 
         $("#category_id").on("select2:select", (e) => {
             let elem = $("#category_id option:selected");
@@ -350,18 +379,6 @@
                 if(e.params.data.text === "Late Delivery") {
                     $("#promised_time").attr("disabled", true).attr("required", false);
                 }
-        });
-
-
-        $("#search_customer").on("select2:select", (e) => {
-            let elem = $("option:selected");
-            let name = elem.text();
-            let number = elem.data("number");
-            let id = elem.val();
-
-            $("#customer_name").val(name);
-            $("#customer_number").val(number);
-            $("#customer_id").val(id);
         });
     </script>
 @endpush

@@ -69,7 +69,13 @@ class ComplainReportController extends Controller
                 ->editColumn('issue_id', function (Complain $complain) {
                     return view('architect.datatables.issues', ['issues' => $complain->issues]);
                 })
-                ->rawColumns(['edit', 'ticket_status_id', 'issue_id'])
+                ->addColumn('complain_source_id', function (Complain $complain) {
+                    return $complain->complain_source->name ?? "N/A";
+                })
+                ->addColumn('category', function (Complain $complain) {
+                    return $complain->issues()->first()->category->name;
+                })
+                ->rawColumns(['ticket_status_id', 'issue_id'])
                 ->toJson();
         } else {
             return response()->json([], 401);
