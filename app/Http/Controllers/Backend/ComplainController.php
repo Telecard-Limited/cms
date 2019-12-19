@@ -153,11 +153,11 @@ class ComplainController extends Controller
             $complain->outlet_id = $request->outlet_id;
             $complain->ticket_status_id = $request->ticket_status_id;
             $complain->user_id = Auth::user()->id;
-            $complain->customer_id = $customer->id;
             $complain->desc = $request->get("desc_$item");
             $complain->remarks = $request->remarks;
             $complain->informed_to = $request->informed_to;
             $complain->informed_by = $request->informed_by;
+            $complain->customer()->associate($customer);
             $complain->complain_source()->associate($request->complain_source_id);
             $complain->save();
 

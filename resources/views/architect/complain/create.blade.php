@@ -365,7 +365,7 @@
             // __form.append(__parent);
             __parent.insertBefore($('#insertBefore'));
 
-            if(name === "Late Delivery") {
+            if(name === "Late Delivery" || name === "Late") {
                 $("#promised_time").attr("disabled", false).attr("required", true);
             }
         })
