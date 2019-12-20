@@ -15,16 +15,18 @@ class IssueController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\JsonResponse|\Illuminate\Http\Response|\Illuminate\View\View
      */
     public function index(Builder $builder)
     {
         $query = Issue::query()->orderBy('created_at', 'desc');
         if(request()->ajax()) {
-            return DataTables::of($query)
+            return DataTables::eloquent($query)
                 ->addColumn('edit', function (Issue $issue) {
-                    $route = route('issue.edit', $issue->id);
-                    return "<a href='$route' class='mb-2 mr-2 btn-icon btn btn-primary'><i class='pe-7s-tools btn-icon-wrapper'></i> Edit</a>";
+                    return view('architect.datatables.form-edit', ['model' => $issue, 'route' => 'issue']);
+                })
+                ->addColumn('delete', function (Issue $issue) {
+                    return view('architect.datatables.form-delete', ['model' => $issue, 'route' => 'issue']);
                 })
                 ->editColumn('active', function (Issue $issue) {
                     $outletText = $issue->active == true ? "Active" : "Inactive";
@@ -37,7 +39,7 @@ class IssueController extends Controller
                 ->editColumn('created_at', function (Issue $issue) {
                     return Carbon::parse($issue->created_at)->diffForHumans();
                 })
-                ->rawColumns(['edit', 'active'])
+                ->rawColumns(['edit', 'active', 'delete'])
                 ->toJson();
         }
 
@@ -47,7 +49,8 @@ class IssueController extends Controller
             ['data' => 'active', 'title' => 'Status'],
             ['data' => 'category', 'title' => 'Category'],
             ['data' => 'created_at', 'title' => 'Created At'],
-            ['data' => 'edit', 'title' => '']
+            ['data' => 'edit', 'title' => ''],
+            ['data' => 'delete', 'title' => '']
         ]);
         return view('architect.issue.index', compact('html'));
     }
