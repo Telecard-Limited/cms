@@ -74,7 +74,7 @@ class SendSMSListener
 
     public function sendMessage2(Complain $complain)
     {
-        $template = "Outlet: " . $complain->outlet->name . "\nComplaint Type: " . $complain->issues()->first()->category . "\nIssue: " . implode(",", $complain->issues()->pluck('name')->toArray()) . "\nOrder ID: " . $complain->order_id . "\nOrder Date & Time: " . $complain->order_datetime . "\nInformed To: " . $complain->informed_to . "\nTicket#: " . $complain->getComplainNumber() . ($complain->remarks ? "\nRemarks: " . $complain->remarks : "");
+        $template = "Outlet: " . $complain->outlet->name . "\nComplaint Type: " . $complain->issues()->first()->category->name . "\nIssue: " . implode(",", $complain->issues()->pluck('name')->toArray()) . "\nOrder ID: " . $complain->order_id . "\nOrder Date & Time: " . $complain->order_datetime . "\nInformed To: " . $complain->informed_to . "\nTicket#: " . $complain->getComplainNumber() . ($complain->remarks ? "\nRemarks: " . $complain->remarks : "");
         $url = Setting::where("key", "=", "url")->first()->value;
         $username = Setting::where("key", "=", "username")->first()->value;
         $password = Setting::where("key", "=", "password")->first()->value;

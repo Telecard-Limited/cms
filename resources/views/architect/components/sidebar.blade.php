@@ -244,7 +244,7 @@
                         </ul>
                     </li>
                 @endif
-                @if(Auth::user()->can('admin-access') || Auth::user()->can('supervisor-access'))
+                @if(Auth::user()->can('admin-access') || Auth::user()->can('supervisor-access') || Auth::user()->can('agent-access'))
                     <li class="app-sidebar__heading">CRM</li>
                     <li class="{{ request()->is('*complain*') && !request()->is('*reports*') && !request()->is("*complainSource*") ? 'mm-active' : '' }}">
                         <a href="javascript:void(0);" class="{{ request()->is('*complain*') && !request()->is('*reports*') && !request()->is("*complainSource*") ? 'mm-active' : '' }}">
@@ -274,45 +274,49 @@
                         </ul>
                     </li>
                 @endif
-                <li class="app-sidebar__heading">Rating SMS</li>
-                <li class="{{ request()->is('*rating*') && !request()->is('*reports*') ? 'mm-active' : '' }}">
-                    <a href="javascript:void(0);" class="{{ request()->is('*rating*') && !request()->is('*reports*') ? 'mm-active' : '' }}">
-                        <i class="metismenu-icon pe-7s-news-paper"></i>
-                        Rating SMS Complains
-                        <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
-                    </a>
-                    <ul>
-                        <li>
-                            <a href="{{ route('rating.create') }}" class="{{ request()->is('*rating/create') ? 'mm-active' : '' }}">
-                                <i class="metismenu-icon"></i>
-                                Add
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{{ route('rating.index') }}" class="{{ request()->is('*rating') ? 'mm-active' : '' }}">
-                                <i class="metismenu-icon">
-                                </i>List
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="app-sidebar__heading">Reports</li>
-                <li>
-                    <a href="{{ route('report.complain.get') }}" class="{{ request()->is('*reports/complains') ? 'mm-active' : '' }}">
-                        <i class="metismenu-icon lnr-database"></i>
-                        Customer Complains
-                    </a>
-                    <a href="{{ route('report.rating.get') }}" class="{{ request()->is('*reports/ratings') ? 'mm-active' : '' }}">
-                        <i class="metismenu-icon pe-7s-news-paper"></i>
-                        Rating Complains
-                    </a>
-                    @if(Auth::user()->can('admin-access'))
-                        <a href="{{ route('report.activity') }}" class="{{ request()->is('*reports/activity') ? 'mm-active' : '' }}">
-                            <i class="metismenu-icon pe-7s-note2"></i>
-                            Activity Logs
+                @if(Auth::user()->can('rating-access') || Auth::user()->can('admin-access'))
+                    <li class="app-sidebar__heading">Rating SMS</li>
+                    <li class="{{ request()->is('*rating*') && !request()->is('*reports*') ? 'mm-active' : '' }}">
+                        <a href="javascript:void(0);" class="{{ request()->is('*rating*') && !request()->is('*reports*') ? 'mm-active' : '' }}">
+                            <i class="metismenu-icon pe-7s-news-paper"></i>
+                            Rating SMS Complains
+                            <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
                         </a>
-                    @endif
-                </li>
+                        <ul>
+                            <li>
+                                <a href="{{ route('rating.create') }}" class="{{ request()->is('*rating/create') ? 'mm-active' : '' }}">
+                                    <i class="metismenu-icon"></i>
+                                    Add
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('rating.index') }}" class="{{ request()->is('*rating') ? 'mm-active' : '' }}">
+                                    <i class="metismenu-icon">
+                                    </i>List
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                @endif
+                @if(Auth::user()->can('admin-access') || Auth::user()->can('supervisor-access'))
+                    <li class="app-sidebar__heading">Reports</li>
+                    <li>
+                        <a href="{{ route('report.complain.get') }}" class="{{ request()->is('*reports/complains') ? 'mm-active' : '' }}">
+                            <i class="metismenu-icon lnr-database"></i>
+                            Customer Complains
+                        </a>
+                        <a href="{{ route('report.rating.get') }}" class="{{ request()->is('*reports/ratings') ? 'mm-active' : '' }}">
+                            <i class="metismenu-icon pe-7s-news-paper"></i>
+                            Rating Complains
+                        </a>
+                        @if(Auth::user()->can('admin-access'))
+                            <a href="{{ route('report.activity') }}" class="{{ request()->is('*reports/activity') ? 'mm-active' : '' }}">
+                                <i class="metismenu-icon pe-7s-note2"></i>
+                                Activity Logs
+                            </a>
+                        @endif
+                    </li>
+                @endif
             </ul>
         </div>
     </div>

@@ -117,10 +117,19 @@ class ComplainSourceController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  \App\ComplainSource  $complainSource
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\Response
      */
     public function destroy(ComplainSource $complainSource)
     {
-        //
+        try {
+            if($complainSource->complains()->count() == 0) {
+                $complainSource->delete();
+                return redirect()->route('complainSource.index')->with("status", "Complain source $complainSource->name has been deleted.");
+            } else {
+                return redirect()->route('complainSource.index')->with("failure", "This source can not be deleted because it has  multiple complains attached to it.");
+            }
+        } catch (\Exception $exception) {
+            return redirect()->route('complainSource.index')->with("failure", "Error deleting complain source. Message: " . $exception->getMessage());
+        }
     }
 }

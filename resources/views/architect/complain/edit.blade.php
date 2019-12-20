@@ -76,7 +76,7 @@
                     <label for="order_datetime" class="col-form-label col-sm-2">Order Date/Time <sup style="color: red;">*</sup></label>
                     <div class="col-sm-10">
                         <div class="input-group date" id="datetimepicker1" data-target-input="nearest">
-                            <input name="order_datetime" id="order_datetime" value="{{ old('order_datetime') }}" type="text" class="form-control datetimepicker-input @error('order_datetime') is-invalid @enderror" data-target="#datetimepicker1" required disabled />
+                            <input name="order_datetime" id="order_datetime" value="{{ old('order_datetime') ?? $complain->order_datetime }}" type="text" class="form-control datetimepicker-input @error('order_datetime') is-invalid @enderror" data-target="#datetimepicker1" required disabled />
                             <div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">
                                 <div class="input-group-text"><i class="fas fa-calendar"></i></div>
                             </div>
@@ -93,7 +93,7 @@
                     <label for="promised_time" class="col-form-label col-sm-2">Promised Date/Time</label>
                     <div class="col-sm-10">
                         <div class="input-group date" id="datetimepicker2" data-target-input="nearest">
-                            <input name="promised_time" id="promised_time" value="{{ old('promised_time') }}" type="text" class="form-control datetimepicker-input @error('promised_time') is-invalid @enderror" data-target="#datetimepicker2" disabled />
+                            <input name="promised_time" id="promised_time" value="{{ old('promised_time') ?? $complain->promised_time }}" type="text" class="form-control datetimepicker-input @error('promised_time') is-invalid @enderror" data-target="#datetimepicker2" disabled />
                             <div class="input-group-append" data-target="#datetimepicker2" data-toggle="datetimepicker">
                                 <div class="input-group-text"><i class="fas fa-calendar"></i></div>
                             </div>

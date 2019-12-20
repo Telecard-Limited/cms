@@ -45,8 +45,12 @@ Route::prefix('backend')->middleware(['auth'])->group(function () {
 
         });
 
-        Route::middleware(['role:admin,supervisor,agent'])->group(function () {
+        Route::middleware(['role:admin,supervisor'])->group(function () {
             Route::resource('messageRecipient', 'MessageRecipientController');
+
+        });
+
+        Route::middleware(['role:admin,supervisor,agent'])->group(function() {
             // Search Route
             Route::get('/searchCustomer', 'SearchController@searchCustomer')->name('search.customer');
             Route::get('/searchIssue', 'SearchController@searchIssue')->name('search.issue');
@@ -57,8 +61,6 @@ Route::prefix('backend')->middleware(['auth'])->group(function () {
             Route::resource('complain', 'ComplainController')->except(['destroy']);
             Route::get('/export/complain', 'ComplainController@export')->name('complain.export');
         });
-
-
 
         //Widgets
         Route::get('/getWidgetData', 'WidgetController@getData')->name('widget.data');
