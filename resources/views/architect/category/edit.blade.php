@@ -41,7 +41,7 @@
 
                 <div class="form-group row">
                     <div class="col-sm-10 offset-sm-2">
-                        <button type="submit" class="btn btn-primary"><i class="fas fa-cogs"></i> SAVE</button>
+                        <button type="submit" class="btn btn-primary"><i class="fas fa-cogs"></i> UPDATE</button>
                     </div>
                 </div>
 

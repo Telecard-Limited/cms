@@ -149,7 +149,7 @@ class UserController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  \App\User  $user
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\Response
      */
     public function destroy(User $user)
     {
@@ -157,7 +157,7 @@ class UserController extends Controller
             abort(403, "Sorry! an admin can't delete an admin");
         }
 
-        if($user->has('complains')) {
+        if($user->complains()->count() > 0) {
             $complains = $user->complains;
             $admins = Role::getAdmins()->pluck("id")->toArray();
             foreach ($complains as $complain) {

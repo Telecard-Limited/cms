@@ -103,7 +103,7 @@ class MessageRecipientController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\MessageRecipient  $messageRecipient
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\Response
      */
     public function update(Request $request, MessageRecipient $messageRecipient)
     {
@@ -123,10 +123,13 @@ class MessageRecipientController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  \App\MessageRecipient  $messageRecipient
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\Response
      */
     public function destroy(MessageRecipient $messageRecipient)
     {
+        if($messageRecipient->complains()->count()) {
+            return redirect()->route('messageRecipient.index')->with('failure', "This message recipient list has multple complains assigned to it. First unassign them before procedding to deletion.");
+        }
         try {
             $messageRecipient->delete();
             return redirect()->route('messageRecipient.index')->with('status', 'SMS Recipient has been deleted.');

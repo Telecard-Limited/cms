@@ -134,10 +134,18 @@ class IssueController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  \App\Issue  $issue
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\Response
      */
     public function destroy(Issue $issue)
     {
+        if($issue->complains()->count() > 0)
+            return redirect()->route('issue.index')->with('failure', "This issue has multple complains assigned to it. First unassign them before procedding to deletion.");
+        elseif($issue->category()->count() > 0) {
+            return redirect()->route('issue.index')->with('failure', "This issue has multple categories assigned to it. First unassign them before procedding to deletion.");
+        }
+        elseif ($issue->ratings()->count() > 0) {
+            return redirect()->route('issue.index')->with('failure', "This issue has multple rating complains assigned to it. First unassign them before procedding to deletion.");
+        }
         try {
             $issue->delete();
         } catch (\Exception $e) {

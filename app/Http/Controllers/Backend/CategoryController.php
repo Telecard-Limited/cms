@@ -6,6 +6,7 @@ use App\Category;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Validation\Rule;
 use Yajra\DataTables\Facades\DataTables;
 use Yajra\DataTables\Html\Builder;
 
@@ -109,21 +110,35 @@ class CategoryController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Category  $category
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\Response
      */
     public function update(Request $request, Category $category)
     {
-        //
+        $request->validate([
+            'name' => ['required', Rule::unique('categories', 'name')->ignoreModel($category)],
+            'status' => ['nullable', 'in:on']
+        ]);
+
+        $category->update($request->all());
+        return redirect()->route('category.index')->with('status', "Category $category->name has been updated.");
     }
 
     /**
      * Remove the specified resource from storage.
      *
      * @param  \App\Category  $category
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\Response
      */
     public function destroy(Category $category)
     {
-        //
+        if($category->issues()->count() > 0) {
+            return redirect()->route('category.index')->with('failure', "This category $category->name has multiple issues assigned to it. First unassign them before procedding to deletion.");
+        }
+        try {
+            $category->delete();
+            return redirect()->route('category.index')->with("status", "Category $category->name has been deleted.");
+        } catch (\Exception $exception) {
+            return redirect()->route('category.index')->with("failure", "Category $category->name deletion failed.");
+        }
     }
 }
