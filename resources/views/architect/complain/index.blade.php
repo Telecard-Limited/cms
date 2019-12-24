@@ -21,9 +21,10 @@
                 </a>
             </div>
         </div>--}}
-        <div class="card-body table-responsive">
-            <table style="width: 100%;" id="dataTable" class="table table-bordered">
-                <thead>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table id="dataTable" class="table table-bordered">
+                    <thead>
                     <tr>
                         <th>Complain#</th>
                         <th>Order#</th>
@@ -43,8 +44,9 @@
                         <th>Created By</th>
                         <th></th>
                     </tr>
-                </thead>
-            </table>
+                    </thead>
+                </table>
+            </div>
         </div>
     </div>
 

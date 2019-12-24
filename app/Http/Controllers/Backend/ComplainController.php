@@ -209,7 +209,7 @@ class ComplainController extends Controller
         ]);
 
         $complain->remarks = $request->remarks;
-        $complain->desc = $request->description;
+        $complain->desc = $request->desc;
         $complain->ticket_status()->associate($request->ticket_status_id);
         $complain->save();
 
