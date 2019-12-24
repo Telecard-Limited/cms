@@ -1,35 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="41fc7393-c950-4897-b33f-4e639bddac92" name="Default Changelist" comment="Customized 404 and 500 pages">
-      <change afterPath="$PROJECT_DIR$/resources/views/architect/category/create.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/architect/category/edit.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/architect/category/index.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/errors/403.blade.php" afterDir="false" />
+    <list default="true" id="41fc7393-c950-4897-b33f-4e639bddac92" name="Default Changelist" comment="Fixed complain Status.">
       <change beforePath="$PROJECT_DIR$/.idea/architect.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/architect.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Complain.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Complain.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Backend/ComplainController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Backend/ComplainController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Backend/IssueController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Backend/IssueController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Backend/SearchController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Backend/SearchController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Issue.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Issue.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Listeners/SendSMSListener.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Listeners/SendSMSListener.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2019_07_14_091003_create_issues_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2019_07_14_091003_create_issues_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2019_07_15_122621_create_complains_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2019_07_15_122621_create_complains_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2019_08_29_173022_add_informed_to_and_informed_by_complains_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2019_08_29_173022_add_informed_to_and_informed_by_complains_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/seeds/FakerSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeds/FakerSeeder.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/architect/complain/create.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/architect/complain/create.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/architect/complain/edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/architect/complain/edit.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/architect/components/sidebar.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/architect/components/sidebar.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/architect/issue/create.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/architect/issue/create.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/layouts/architect.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/architect.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
-    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -154,6 +130,11 @@
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
   </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="true" />
@@ -168,27 +149,15 @@
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="D:\xampp\htdocs\architect\app\Http\Controllers\Backend" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\xampp\htdocs\architect\resources\views\errors" />
       <recent name="D:\xampp\htdocs\architect\resources\views\architect" />
       <recent name="D:\xampp\htdocs\architect\database\seeds" />
       <recent name="D:\xampp\htdocs\architect\resources\views\architect\complain" />
     </key>
-  </component>
-  <component name="RunDashboard">
-    <option name="ruleStates">
-      <list>
-        <RuleState>
-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-        </RuleState>
-        <RuleState>
-          <option name="name" value="StatusDashboardGroupingRule" />
-        </RuleState>
-      </list>
-    </option>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\xampp\htdocs\architect\app\Http\Controllers\Backend" />
+    </key>
   </component>
   <component name="RunManager" selected="PHP Built-in Web Server.Debugging">
     <configuration name="phpunit.xml" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
@@ -202,6 +171,18 @@
       <item itemvalue="PHP Built-in Web Server.Debugging" />
       <item itemvalue="PHPUnit.phpunit.xml" />
     </list>
+  </component>
+  <component name="ServiceViewManager">
+    <option name="viewStates">
+      <list>
+        <serviceView>
+          <treeState>
+            <expand />
+            <select />
+          </treeState>
+        </serviceView>
+      </list>
+    </option>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -242,7 +223,14 @@
       <workItem from="1568283113447" duration="33000" />
       <workItem from="1568637326849" duration="2014000" />
       <workItem from="1568897992944" duration="14341000" />
-      <workItem from="1569223624946" duration="2155000" />
+      <workItem from="1569223624946" duration="3731000" />
+      <workItem from="1570098484855" duration="760000" />
+      <workItem from="1576040149374" duration="1241000" />
+      <workItem from="1576068362882" duration="1687000" />
+      <workItem from="1576236338518" duration="600000" />
+      <workItem from="1576650490649" duration="5566000" />
+      <workItem from="1576733486040" duration="28809000" />
+      <workItem from="1577167727661" duration="4734000" />
     </task>
     <task id="LOCAL-00002" summary="Fixed nulled activity logs">
       <created>1563962767166</created>
@@ -300,7 +288,112 @@
       <option name="project" value="LOCAL" />
       <updated>1567166899214</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Pushed changes requested by customer">
+      <created>1569226752877</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1569226752879</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Fixed Widget data">
+      <created>1570098636696</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1570098636696</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Fixed Widget data">
+      <created>1570099072050</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1570099072050</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Fixed complain Status.">
+      <created>1576069494318</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1576069494318</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Resolve minor UI issues as per customer requirement.">
+      <created>1576662151000</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1576662151000</updated>
+    </task>
+    <task id="LOCAL-00015" summary="Fixed complain Status.">
+      <created>1576662622747</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1576662622747</updated>
+    </task>
+    <task id="LOCAL-00016" summary="Updated favicon.ico">
+      <created>1576662679002</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1576662679002</updated>
+    </task>
+    <task id="LOCAL-00017" summary="Updated favicon.ico">
+      <created>1576662701876</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1576662701876</updated>
+    </task>
+    <task id="LOCAL-00018" summary="Fixed issues related to authorization and other minor bugs.">
+      <created>1576758190973</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1576758190973</updated>
+    </task>
+    <task id="LOCAL-00019" summary="QUick fixed route.">
+      <created>1576758733947</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1576758733947</updated>
+    </task>
+    <task id="LOCAL-00020" summary="fixed late delivery typo">
+      <created>1576760025695</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1576760025695</updated>
+    </task>
+    <task id="LOCAL-00021" summary="Access rights for agents.">
+      <created>1576827114497</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1576827114497</updated>
+    </task>
+    <task id="LOCAL-00022" summary="Fixed multiple deletion issues.">
+      <created>1576827994184</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1576827994184</updated>
+    </task>
+    <task id="LOCAL-00023" summary="Fixed IssueController.php">
+      <created>1576843060771</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1576843060771</updated>
+    </task>
+    <task id="LOCAL-00024" summary="Fixed width, slow loading issue and description bug.">
+      <created>1577174306139</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1577174306139</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -327,6 +420,48 @@
     <MESSAGE value="Fixed minor issues" />
     <MESSAGE value="Added SMS provisioning on Open and Closed status." />
     <MESSAGE value="Added bell notifications" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added bell notifications" />
+    <MESSAGE value="Pushed changes requested by customer" />
+    <MESSAGE value="Fixed Widget data" />
+    <MESSAGE value="Resolve minor UI issues as per customer requirement." />
+    <MESSAGE value="Fixed complain Status." />
+    <MESSAGE value="Updated favicon.ico" />
+    <MESSAGE value="Fixed issues related to authorization and other minor bugs." />
+    <MESSAGE value="QUick fixed route." />
+    <MESSAGE value="fixed late delivery typo" />
+    <MESSAGE value="Access rights for agents." />
+    <MESSAGE value="Fixed multiple deletion issues." />
+    <MESSAGE value="Fixed IssueController.php" />
+    <MESSAGE value="Fixed width, slow loading issue and description bug." />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed width, slow loading issue and description bug." />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="413" y="123" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1576842427879">
+      <screen x="0" y="0" width="1366" height="738" />
+    </state>
+    <state x="413" y="123" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1366.738@0.0.1366.738" timestamp="1576842427879" />
+    <state x="308" y="0" key="CommitChangelistDialog2" timestamp="1577174304930">
+      <screen x="0" y="0" width="1366" height="738" />
+    </state>
+    <state x="308" y="0" key="CommitChangelistDialog2/0.0.1366.738@0.0.1366.738" timestamp="1577174304930" />
+    <state x="463" y="123" key="FileChooserDialogImpl" timestamp="1576657895249">
+      <screen x="0" y="0" width="1366" height="738" />
+    </state>
+    <state x="463" y="123" key="FileChooserDialogImpl/0.0.1366.738@0.0.1366.738" timestamp="1576657895249" />
+    <state x="275" y="101" key="Vcs.Push.Dialog.v2" timestamp="1577174310431">
+      <screen x="0" y="0" width="1366" height="738" />
+    </state>
+    <state x="275" y="101" key="Vcs.Push.Dialog.v2/0.0.1366.738@0.0.1366.738" timestamp="1577174310431" />
+    <state x="378" y="191" key="com.intellij.ide.util.TipDialog" timestamp="1576237070404">
+      <screen x="0" y="0" width="1366" height="738" />
+    </state>
+    <state x="378" y="191" key="com.intellij.ide.util.TipDialog/0.0.1366.738@0.0.1366.738" timestamp="1576237070404" />
+    <state x="492" y="285" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1576662635419">
+      <screen x="0" y="0" width="1366" height="738" />
+    </state>
+    <state x="492" y="285" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1366.738@0.0.1366.738" timestamp="1576662635419" />
+    <state x="346" y="59" width="672" height="678" key="search.everywhere.popup" timestamp="1577171514371">
+      <screen x="0" y="0" width="1366" height="738" />
+    </state>
+    <state x="346" y="59" width="672" height="678" key="search.everywhere.popup/0.0.1366.738@0.0.1366.738" timestamp="1577171514371" />
   </component>
 </project>

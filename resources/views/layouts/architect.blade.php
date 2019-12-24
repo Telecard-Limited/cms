@@ -13,11 +13,11 @@
     <meta name="msapplication-tap-highlight" content="no">
     <meta name="csrf-token" content="{{ csrf_token() }}" />
     <link href="{{ asset('css/select2.min.css') }}" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha14/css/tempusdominus-bootstrap-4.min.css" />
+    <link rel="stylesheet" href="{{ asset('css/tempusdominus-bootstrap-4.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/styles/select2-bootstrap4.min.css') }}">
     <link href="{{ asset('assets/styles/main.css') }}" rel="stylesheet">
-    <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+    <link href="{{ asset('css/bootstrap-toggle.min.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('css/toastr.min.css') }}">
     <style>
         .dataTables_wrapper {
             max-width: 960px;
@@ -115,16 +115,16 @@
     </div>
 </div>
 <script
-    src="https://code.jquery.com/jquery-3.4.1.min.js"
+    src="{{ asset('js/jquery-3.4.1.min.js') }}"
     integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
     crossorigin="anonymous"></script>
 <script type="text/javascript" src="{{ asset('assets/scripts/main.js') }}"></script>
 <script src="{{ asset('js/select2.full.min.js') }}"></script>
-<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+<script src="{{ asset('js/bootstrap-toggle.min.js') }}"></script>
+<script src="{{ asset('js/toastr.min.js') }}"></script>
 <script src="{{ asset('js/axios.min.js') }}"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha14/js/tempusdominus-bootstrap-4.min.js"></script>
+<script src="{{ asset('js/moment.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/tempusdominus-bootstrap-4.min.js') }}"></script>
 
 <script>
     toastr.options = {
