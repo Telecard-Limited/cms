@@ -6,6 +6,14 @@
 @section('desc', 'Showing Complain# ' . $complain->getComplainNumber())
 @section('icon', 'pe-7s-comment')
 
+@section('styles')
+    <style>
+        .main-card {
+            max-width: 1000px;
+        }
+    </style>
+@endsection
+
 @section('content')
 
     <div class="row">
