@@ -82,6 +82,9 @@ class ActivityReportController extends Controller
                 ->editColumn('causer_id' , function (Activity $activity) {
                     return $activity->causer == null ? "NULL" : $activity->causer->name;
                 })
+                ->editColumn('properties', function (Activity $activity) {
+                    return json_encode($activity->properties);
+                })
                 ->rawColumns(['description'])
                 ->toJson();
         }
@@ -93,6 +96,7 @@ class ActivityReportController extends Controller
             ['data' => 'subject_type', 'title' => 'Subject Type'],
             ['data' => 'causer_id', 'title' => 'Causer'],
             ['data' => 'causer_type', 'title' => 'Causer Type'],
+            ['data' => 'properties', 'title' => 'Activity'],
             ['data' => 'created_at', 'title' => 'Created'],
         ]);
 
