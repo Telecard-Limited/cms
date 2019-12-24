@@ -18,11 +18,6 @@
     <link href="{{ asset('assets/styles/main.css') }}" rel="stylesheet">
     <link href="{{ asset('css/bootstrap-toggle.min.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/toastr.min.css') }}">
-    <style>
-        .dataTables_wrapper {
-            max-width: 960px;
-        }
-    </style>
 </head>
     @stack('styles')
 <body>
