@@ -46,6 +46,9 @@ class ComplainController extends Controller
             ->editColumn('id', function (Complain $complain) {
                 return "<a href='" . route('complain.show', $complain->id) . "' class='btn-link'>" . $complain->getComplainNumber() . "</a>";
             })
+            ->editColumn('desc', function (Complain $complain) {
+                return $complain->desc ?? $complain->activities()->where('subject_id', $complain->id)->first()->properties['attributes']['desc'];
+            })
             ->editColumn('outlet_id', function (Complain $complain) {
                 return $complain->outlet->name;
             })
