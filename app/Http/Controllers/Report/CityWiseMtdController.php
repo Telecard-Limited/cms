@@ -51,6 +51,7 @@ class CityWiseMtdController extends Controller
             $color = $this->getColor($key);
             $datasets[$key]['backgroundColor'] = "rgba($color[0], $color[1], $color[2], 0.9)";
             $datasets[$key]['borderColor'] = "rgba($color[0], $color[1], $color[2], 0.9)";
+            $datasets[$key]['lineTension'] = 0;
         }
 
         /*foreach ($dates as $key => $item) {
