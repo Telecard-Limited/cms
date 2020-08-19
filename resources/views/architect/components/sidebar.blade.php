@@ -320,11 +320,11 @@
                             City Wise <span class="badge badge-pill badge-danger">New</span>
                         </a>
                         <a href="{{ route('mtd-comparison.get') }}" class="{{ request()->is("*reports/graphical/mtd-comparison") }}">
-                            <i class="metismenu-icon pe-7s-graph"></i>
+                            <i class="metismenu-icon pe-7s-graph3"></i>
                             MTD Comparison <span class="badge badge-pill badge-danger">New</span>
                         </a>
                         <a href="{{ route('city-wise-mtd') }}" class="{{ request()->is("*reports/graphical/city-wise-mtd") }}">
-                            <i class="metismenu-icon pe-7s-graph"></i>
+                            <i class="metismenu-icon pe-7s-graph1"></i>
                             City Wise MTD <span class="badge badge-pill badge-danger">New</span>
                         </a>
                     </li>

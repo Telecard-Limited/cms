@@ -24,7 +24,7 @@
   <component name="ChangeListManager">
     <list default="true" id="41fc7393-c950-4897-b33f-4e639bddac92" name="Default Changelist" comment="Fixed complain Status.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Report/CityWiseMtdController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Report/CityWiseMtdController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/architect/components/sidebar.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/architect/components/sidebar.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -241,7 +241,7 @@
       <workItem from="1577167727661" duration="4734000" />
       <workItem from="1597302509642" duration="955000" />
       <workItem from="1597303685498" duration="10655000" />
-      <workItem from="1597666203879" duration="22935000" />
+      <workItem from="1597666203879" duration="23258000" />
     </task>
     <task id="LOCAL-00002" summary="Fixed nulled activity logs">
       <created>1563962767166</created>
@@ -449,9 +449,9 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="413" y="119" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1366.728@0.0.1366.728" timestamp="1597834957518" />
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1597835404221">
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1597838735684">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1597835404221" />
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1597838735684" />
   </component>
 </project>
