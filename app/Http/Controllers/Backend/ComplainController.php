@@ -9,6 +9,8 @@ use App\Department;
 use App\Events\SendSMSEvent;
 use App\Exports\ComplainExport;
 use App\Outlet;
+use App\TicketStatus;
+use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -27,7 +29,7 @@ class ComplainController extends Controller
     public function index(Builder $builder)
     {
         if(request()->ajax()) {
-            $query = Complain::query()->orderBy('created_at', 'desc');
+            $query = Complain::query()->limit(500)->orderBy('created_at', 'desc');
             return $this->getQuery($query);
         }
 
@@ -211,6 +213,14 @@ class ComplainController extends Controller
             "ticket_status_id" => ["required", "exists:ticket_statuses,id"],
         ]);
 
+        /** @var User $user */
+        $user = Auth::user();
+        $status = TicketStatus::query()->findOrFail($request->ticket_status_id);
+
+        if(!$user->roles->contains('name', 'agent') && $status->name === "Resolved") {
+            abort(401, "Only Call Center/CRM can Change The Status Of Ticket From Close To Resolved");
+        }
+
         $complain->remarks = $request->remarks;
         $complain->desc = $request->desc;
         $complain->ticket_status()->associate($request->ticket_status_id);
@@ -224,7 +234,7 @@ class ComplainController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Backend\Complain  $complain
+     * @param  \App\Complain  $complain
      * @return \Illuminate\Http\Response
      */
     public function destroy(Complain $complain)

@@ -72,6 +72,18 @@ Route::prefix('backend')->middleware(['auth'])->group(function () {
             Route::view('/', 'architect.reports.complains')->name('report.complain.get');
             Route::post('report', 'ComplainReportController@report')->name('report.complain.post');
         });
+        Route::prefix('graphical')->group(function () {
+            Route::view('city-wise', 'architect.reports.city-wise')->name('report.city-wise.get');
+            Route::post('city-wise', 'CityWiseController@show')->name('report.city-wise');
+
+            // MTD Comparison
+            Route::view('mtd-comparison', 'architect.reports.mtd-comparison')->name('mtd-comparison.get');
+            Route::post('mtd-comparison', 'MtdComparisonController@show')->name('report.mtd-comparison');
+
+            // City Wise MTD Trend
+            Route::view('city-wise-mtd', 'architect.reports.city-wise-mtd-trend')->name('city-wise-mtd');
+            Route::post('city-wise-mtd', 'CityWiseMtdController@show')->name('report.city-wise-mtd');
+        });
         Route::prefix('ratings')->middleware(['role:admin,rating'])->group(function () {
             Route::view('/', 'architect.reports.ratings')->name('report.rating.get');
             Route::post('report', 'RatingReportController@report')->name('report.rating.post');

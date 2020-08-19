@@ -315,6 +315,18 @@
                                 Activity Logs
                             </a>
                         @endif
+                        <a href="{{ route('report.city-wise.get') }}" class="{{ request()->is("*reports/graphical/city-wise") }}">
+                            <i class="metismenu-icon pe-7s-graph"></i>
+                            City Wise <span class="badge badge-pill badge-danger">New</span>
+                        </a>
+                        <a href="{{ route('mtd-comparison.get') }}" class="{{ request()->is("*reports/graphical/mtd-comparison") }}">
+                            <i class="metismenu-icon pe-7s-graph"></i>
+                            MTD Comparison <span class="badge badge-pill badge-danger">New</span>
+                        </a>
+                        <a href="{{ route('city-wise-mtd') }}" class="{{ request()->is("*reports/graphical/city-wise-mtd") }}">
+                            <i class="metismenu-icon pe-7s-graph"></i>
+                            City Wise MTD <span class="badge badge-pill badge-danger">New</span>
+                        </a>
                     </li>
                 @endif
             </ul>

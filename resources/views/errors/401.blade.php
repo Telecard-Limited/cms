@@ -113,6 +113,9 @@
 <h1>401</h1>
 <div><p>> <span>ERROR CODE</span>: "<i>HTTP 401 Unauthorized Access</i>"</p>
     <p>> <span>ERROR DESCRIPTION</span>: "<i>Access Denied. You Do Not Have The Permission To Access This Page On This Server</i>"</p>
+    @if($exception->getMessage())
+        <p>> <span>ERROR MESSAGE</span>: "<i>{{ $exception->getMessage() }}</i>" </p>
+    @endif
     <p>> <span>ERROR POSSIBLY CAUSED BY</span>: [<b>execute access forbidden, read access forbidden, write access forbidden, ssl required, ssl 128 required, ip address rejected, client certificate required, site access denied, too many users, invalid configuration, password change, mapper denied access, client certificate revoked, directory listing denied, client access licenses exceeded, client certificate is untrusted or invalid, client certificate has expired or is not yet valid, passport logon failed, source access denied, infinite depth is denied, too many requests from the same client ip</b>...]</p>
     <p>> <span>SOME PAGES ON THIS SERVER THAT YOU DO HAVE PERMISSION TO ACCESS</span>: [<a href={{ url("/") }}>Home Page</a>, <a href={{ route('complain.index') }}>Complains</a>...]</p><p>> <span>HAVE A NICE DAY SIR {{ strtoupper(Auth::user()->name) }} :-)</span></p>
 </div>

@@ -20,7 +20,8 @@
         "spatie/laravel-validation-rules": "^2.3",
         "spatie/string": "^2.2",
         "yajra/laravel-datatables-html": "^4.5",
-        "yajra/laravel-datatables-oracle": "^9.4"
+        "yajra/laravel-datatables-oracle": "^9.4",
+        "ext-json": "*"
     },
     "require-dev": {
         "beyondcode/laravel-dump-server": "^1.0",
