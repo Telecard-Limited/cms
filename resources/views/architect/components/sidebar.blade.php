@@ -315,15 +315,15 @@
                                 Activity Logs
                             </a>
                         @endif
-                        <a href="{{ route('report.city-wise.get') }}" class="{{ request()->is("*reports/graphical/city-wise") }}">
+                        <a href="{{ route('report.city-wise.get') }}" class="{{ request()->is("*reports/graphical/city-wise") ? 'mm-active' : '' }}">
                             <i class="metismenu-icon pe-7s-graph"></i>
                             City Wise <span class="badge badge-pill badge-danger">New</span>
                         </a>
-                        <a href="{{ route('mtd-comparison.get') }}" class="{{ request()->is("*reports/graphical/mtd-comparison") }}">
+                        <a href="{{ route('mtd-comparison.get') }}" class="{{ request()->is("*reports/graphical/mtd-comparison") ? 'mm-active' : '' }}">
                             <i class="metismenu-icon pe-7s-graph3"></i>
                             MTD Comparison <span class="badge badge-pill badge-danger">New</span>
                         </a>
-                        <a href="{{ route('city-wise-mtd') }}" class="{{ request()->is("*reports/graphical/city-wise-mtd") }}">
+                        <a href="{{ route('city-wise-mtd') }}" class="{{ request()->is("*reports/graphical/city-wise-mtd") ? 'mm-active' : '' }}">
                             <i class="metismenu-icon pe-7s-graph1"></i>
                             City Wise MTD <span class="badge badge-pill badge-danger">New</span>
                         </a>
