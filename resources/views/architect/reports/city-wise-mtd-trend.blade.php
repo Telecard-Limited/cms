@@ -1,7 +1,7 @@
 @extends('layouts.architect')
 
 @section('title', 'Report - City Wise MTD Trend')
-@section('icon', 'metismenu-icon pe-7s-graph')
+@section('icon', 'metismenu-icon pe-7s-graph3')
 
 @push('styles')
     <link rel="stylesheet" href="{{ asset('css/bootstrap-datepicker3.min.css') }}">

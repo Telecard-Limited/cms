@@ -14,7 +14,7 @@ class MtdComparisonController extends Controller
 {
 
     private function getColor($num) {
-        $hash = md5('color' . $num); // modify 'color' to get a different palette
+        $hash = md5('vibrant' . $num); // modify 'color' to get a different palette
         return array(
             hexdec(substr($hash, 0, 2)), // r
             hexdec(substr($hash, 2, 2)), // g

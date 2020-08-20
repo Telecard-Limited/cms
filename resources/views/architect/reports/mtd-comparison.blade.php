@@ -1,7 +1,7 @@
 @extends('layouts.architect')
 
 @section('title', 'Report - MTD Comparison of Complaint Categories')
-@section('icon', 'metismenu-icon pe-7s-graph')
+@section('icon', 'metismenu-icon pe-7s-graph1')
 
 @push('styles')
     <link rel="stylesheet" href="{{ asset('css/bootstrap-datepicker3.min.css') }}">
