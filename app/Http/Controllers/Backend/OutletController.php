@@ -139,7 +139,7 @@ class OutletController extends Controller
      */
     public function destroy(Outlet $outlet)
     {
-        if($outlet->has('complains')) {
+        if($outlet->complains()->exists()) {
             $complains = $outlet->complains->pluck('id');
             return redirect()->route('outlet.index')->with('failure', "This outlet has following complains associated with it. Please disassociate them before deleting. $complains");
         }
