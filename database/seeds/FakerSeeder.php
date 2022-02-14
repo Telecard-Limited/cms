@@ -1,8 +1,10 @@
 <?php
 
+use App\Category;
 use App\Role;
 use App\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class FakerSeeder extends Seeder
 {
@@ -54,9 +56,18 @@ class FakerSeeder extends Seeder
             ]);
         }
 
+        $categories = [
+            ['name' => 'high'],
+            ['name' => 'normal'],
+            ['name' => 'low'],
+        ];
+
+        DB::table('categories')->upsert($categories, 'name');
+
         for ($i = 0; $i <= $issueCount; $i++) {
             \App\Issue::create([
-                'name' => \Illuminate\Support\Arr::random(['Link Down', 'Other', 'Internet Down', 'Oven Not Working', 'Electricity Issue', 'Website Down'])
+                'name' => \Illuminate\Support\Arr::random(['Link Down', 'Other', 'Internet Down', 'Oven Not Working', 'Electricity Issue', 'Website Down']),
+                'category_id' => \Illuminate\Support\Arr::random([1,2,3])
             ]);
         }
     }

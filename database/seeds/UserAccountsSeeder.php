@@ -29,7 +29,7 @@ class UserAccountsSeeder extends Seeder
             ]
         ];
 
-        DB::table('users')->insert($data);
+        DB::table('users')->upsert($data, 'username');
 
         $rolesData = [
             ['name' => 'superadmin', 'desc' => 'Super Admin'],
@@ -39,7 +39,7 @@ class UserAccountsSeeder extends Seeder
             ['name' => 'rating', 'desc' => 'Rating User']
         ];
 
-        DB::table('roles')->insert($rolesData);
+        DB::table('roles')->upsert($rolesData, 'name');
 
         $role = Role::where("name", "superadmin")->first();
         $roleAdmin = Role::where("name", "admin")->first();

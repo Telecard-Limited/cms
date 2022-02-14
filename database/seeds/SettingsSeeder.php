@@ -12,6 +12,7 @@ class SettingsSeeder extends Seeder
      */
     public function run()
     {
+        DB::table('settings')->truncate();
         DB::table('settings')->insert([
             ["key" => "url", "value" => "http://sms.its.com.pk/api"],
             ["key" => "api_key", "value" => ""],
