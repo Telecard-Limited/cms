@@ -128,7 +128,7 @@ class ComplainController extends Controller
             'informed_to' => ['nullable', 'string'],
             'informed_by' => ['nullable', 'string'],
             'order_id' => ['nullable'],
-            'order_number' => ['nullable'],
+            'order_number' => ['required'],
             'order_datetime' => ['nullable', 'date'],
             'outlet_id' => ['required', 'exists:outlets,id'],
             'category_id' => ['required', 'exists:categories,id'],
