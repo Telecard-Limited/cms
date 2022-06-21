@@ -178,10 +178,9 @@
                 </div>
 
                 <div class="form-group row">
-                    <label for="ticket_status_id" class="col-form-label col-sm-2">Status <sup style="color:red;">*</sup></label>
+                    <label for="ticket_status_id" class="col-form-label col-sm-2">Status</label>
                     <div class="col-sm-10">
                         <select class="form-control singleselect-dropdown @error('ticket_status_id') is-invalid @enderror" name="ticket_status_id" id="ticket_status_id" required style="width: 100%;">
-                            <option></option>
                             @foreach(\App\TicketStatus::pluck('name', 'id') as $index => $status)
                                 <option {{ old('ticket_status_id') == $index ? 'selected' : ''  }} value="{{ $index }}">{{ $status }}</option>
                             @endforeach
