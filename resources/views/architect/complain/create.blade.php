@@ -110,7 +110,7 @@
                 <div class="form-group row">
                     <label for="order_id" class="col-form-label col-sm-2">Order Number <sup style="color:red;">*</sup></label>
                     <div class="col-sm-10">
-                        <input name="order_id" type="text" id="order_id" placeholder="Order Number" value="{{ old('order_id') }}" class="form-control @error('order_id') is-invalid @enderror" required>
+                        <input name="order_id" type="text" id="order_id" placeholder="Order Number" value="{{ old('order_id') }}" class="form-control @error('order_id') is-invalid @enderror" >
                         @error('order_id')
                         <div class="invalid-feedback">
                             <strong>{{ $message }}</strong>
